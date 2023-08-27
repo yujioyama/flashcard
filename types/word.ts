@@ -14,5 +14,5 @@ export type Word = {
       synonyms: string[];
       antonyms: string[];
     }[];
-  };
+  }[];
 };

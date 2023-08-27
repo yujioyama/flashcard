@@ -2,7 +2,8 @@
 import styles from "./page.module.css";
 import { FormEventHandler, useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { Word } from "../../types/word";
+import type { Word } from "../../types/word";
+import clsx from "clsx";
 
 export default function Home() {
   const [newWord, setNewWord] = useState<string>("");
@@ -20,6 +21,16 @@ export default function Home() {
     setWordList([...wordList, word]);
   };
 
+  const handlePronunciation = (pronunciation: string) => {
+    const audio = new Audio(pronunciation);
+    audio
+      .play()
+      .then(() => {
+        console.log("Audio started!");
+      })
+      .catch((error) => console.warn(error));
+  };
+
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit}>
@@ -35,7 +46,35 @@ export default function Home() {
       <ul className={styles.list}>
         {wordList.map((word) => (
           <li key={word.word} className={styles.card}>
-            <p>{word.word}</p>
+            <div className={clsx(styles.cardInner, styles.front)}>
+              <p>{word.word}</p>
+              {word.phonetics.map((pronunciation, index) => (
+                <p
+                  onClick={() => handlePronunciation(pronunciation.audio)}
+                  key={pronunciation.audio}
+                >
+                  発音
+                </p>
+              ))}
+            </div>
+
+            <div className={clsx(styles.cardInner, styles.back)}>
+              {word.meanings.map((meaning) => (
+                <>
+                  <p key={meaning.partOfSpeech}>{meaning.partOfSpeech}</p>
+                  {meaning.definitions.map((definition, index) => {
+                    const { definition: definitionDesc, example } = definition;
+
+                    return (
+                      <>
+                        <p key={definitionDesc}>意味：{definitionDesc}</p>
+                        {example && <p key={example}>例文：{example}</p>}
+                      </>
+                    );
+                  })}
+                </>
+              ))}
+            </div>
           </li>
         ))}
       </ul>
