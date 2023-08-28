@@ -1,5 +1,5 @@
 "use client";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import { FormEventHandler, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import type { Word } from "../../types/word";
@@ -8,6 +8,7 @@ import clsx from "clsx";
 export default function Home() {
   const [newWord, setNewWord] = useState<string>("");
   const [wordList, setWordList] = useState<Word[]>([]);
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -31,6 +32,10 @@ export default function Home() {
       .catch((error) => console.warn(error));
   };
 
+  const handleFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
+
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit}>
@@ -45,8 +50,14 @@ export default function Home() {
 
       <ul className={styles.list}>
         {wordList.map((word) => (
-          <li key={word.word} className={styles.card}>
-            <div className={clsx(styles.cardInner, styles.front)}>
+          <li key={word.word} className={styles.card} onClick={handleFlip}>
+            <div
+              className={clsx(
+                styles.cardInner,
+                styles.front,
+                isFlipped && styles.isFlipped
+              )}
+            >
               <p>{word.word}</p>
               {word.phonetics.map((pronunciation, index) => (
                 <p
@@ -58,7 +69,13 @@ export default function Home() {
               ))}
             </div>
 
-            <div className={clsx(styles.cardInner, styles.back)}>
+            <div
+              className={clsx(
+                styles.cardInner,
+                styles.back,
+                isFlipped && styles.isFlipped
+              )}
+            >
               {word.meanings.map((meaning) => (
                 <>
                   <p key={meaning.partOfSpeech}>{meaning.partOfSpeech}</p>

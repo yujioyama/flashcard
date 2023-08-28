@@ -29,15 +29,17 @@
   overflow: scroll;
 }
 
-.card:hover .front {
-  transform: rotateX(180deg);
+.front {
+  &.isFlipped {
+    transform: rotateX(180deg);
+  }
 }
 
 .back {
   background-color: green;
   transform: rotateX(180deg);
-}
 
-.card:hover .back {
-  transform: rotateX(0deg);
+  &.isFlipped {
+    transform: rotateX(0deg);
+  }
 }
