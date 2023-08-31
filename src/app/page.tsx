@@ -1,14 +1,34 @@
 "use client";
 import styles from "./page.module.scss";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useState, use, cache } from "react";
 import axios, { AxiosResponse } from "axios";
 import type { Word } from "../../types/word";
 import clsx from "clsx";
+
+const getWords = cache(() =>
+  fetch("http://localhost:3000/api/words").then((res) => res.json())
+);
 
 export default function Home() {
   const [newWord, setNewWord] = useState<string>("");
   const [wordList, setWordList] = useState<Word[]>([]);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
+
+  const words = use<Word[]>(getWords());
+
+  console.log(words);
+
+  const postWord = async (word: Word) => {
+    const res = await fetch("http://localhost:3000/api/words", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(word),
+    });
+
+    const json = await res.json();
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -19,7 +39,13 @@ export default function Home() {
 
     const [word] = response.data;
 
+    if (wordList.some((e) => e.word === word.word)) return;
+
+    use(postWord(word));
+
     setWordList([...wordList, word]);
+
+    setNewWord("");
   };
 
   const handlePronunciation = (pronunciation: string) => {
@@ -77,19 +103,19 @@ export default function Home() {
               )}
             >
               {word.meanings.map((meaning) => (
-                <>
+                <div key={meaning.definitions[0].definition}>
                   <p key={meaning.partOfSpeech}>{meaning.partOfSpeech}</p>
                   {meaning.definitions.map((definition, index) => {
                     const { definition: definitionDesc, example } = definition;
 
                     return (
-                      <>
+                      <div key={definitionDesc}>
                         <p key={definitionDesc}>意味：{definitionDesc}</p>
                         {example && <p key={example}>例文：{example}</p>}
-                      </>
+                      </div>
                     );
                   })}
-                </>
+                </div>
               ))}
             </div>
           </li>
