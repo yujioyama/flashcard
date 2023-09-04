@@ -1,23 +1,29 @@
 'use client'
 import axios, { AxiosResponse } from 'axios'
 import clsx from 'clsx'
-import { FormEventHandler, useState, use, cache } from 'react'
+import { FormEventHandler, useState, use, useEffect } from 'react'
 import type { Word } from '../../types/word'
 import styles from './page.module.scss'
-
-const getWords = cache(() => fetch('http://localhost:3000/api/words').then((res) => res.json()))
 
 export default function Home() {
   const [newWord, setNewWord] = useState<string>('')
   const [wordList, setWordList] = useState<Word[]>([])
   const [isFlipped, setIsFlipped] = useState<boolean>(false)
 
-  const words = use<Word[]>(getWords())
+  useEffect(() => {
+    async function getWord() {
+      const response: AxiosResponse<Word[]> = await axios.get('http://localhost:3000/api/words')
 
-  console.log(words)
+      const { words } = response.data
 
-  const postWord = async (word: Word) => {
-    const res = await fetch('http://localhost:3000/api/words', {
+      setWordList(words)
+    }
+
+    getWord()
+  }, [])
+
+  const postWord: AxiosResponse<Word> = async (word: Word) => {
+    const response = await axios.get('http://localhost:3000/api/words', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +31,7 @@ export default function Home() {
       body: JSON.stringify(word),
     })
 
-    const json = await res.json()
+    console.log(response)
   }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -69,30 +75,33 @@ export default function Home() {
       </form>
 
       <ul className={styles.list}>
-        {wordList.map((word) => (
-          <li key={word.word} className={styles.card} onClick={handleFlip}>
+        {wordList.map((word, index) => (
+          <li key={`${word.word}_${String(index)}`} className={styles.card} onClick={handleFlip}>
             <div className={clsx(styles.cardInner, styles.front, isFlipped && styles.isFlipped)}>
               <p>{word.word}</p>
-              {word.phonetics.map((pronunciation, index) => (
-                <p
-                  onClick={() => handlePronunciation(pronunciation.audio)}
-                  key={pronunciation.audio}
-                >
-                  発音
-                </p>
-              ))}
+              {word.phonetics.map(
+                (pronunciation, index) =>
+                  pronunciation && (
+                    <p
+                      onClick={() => handlePronunciation(pronunciation.audio)}
+                      key={`${pronunciation.audio}_${String(index)}`}
+                    >
+                      発音
+                    </p>
+                  ),
+              )}
             </div>
 
             <div className={clsx(styles.cardInner, styles.back, isFlipped && styles.isFlipped)}>
-              {word.meanings.map((meaning) => (
-                <div key={meaning.definitions[0].definition}>
+              {word.meanings.map((meaning, index) => (
+                <div key={`${meaning.definitions[0].definition}_meanings_${String(index)}`}>
                   <p key={meaning.partOfSpeech}>{meaning.partOfSpeech}</p>
                   {meaning.definitions.map((definition, index) => {
                     const { definition: definitionDesc, example } = definition
 
                     return (
-                      <div key={definitionDesc}>
-                        <p key={definitionDesc}>意味：{definitionDesc}</p>
+                      <div key={`${definitionDesc}_definition_${String(index)}`}>
+                        <p>意味：{definitionDesc}</p>
                         {example && <p key={example}>例文：{example}</p>}
                       </div>
                     )

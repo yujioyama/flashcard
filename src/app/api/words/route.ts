@@ -1,8 +1,17 @@
-import { prisma } from '../../../../lib/prisma'
 import { NextResponse } from 'next/server'
+import { prisma } from '../../../../lib/prisma'
 
 export async function GET(request: Request) {
-  const words = await prisma.word.findMany()
+  const words = await prisma.word.findMany({
+    include: {
+      phonetics: true,
+      meanings: {
+        include: {
+          definitions: true,
+        },
+      },
+    },
+  })
   return NextResponse.json({ words })
 }
 
