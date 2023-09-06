@@ -4,12 +4,11 @@ import clsx from 'clsx'
 import { NextResponse } from 'next/server'
 import { FormEventHandler, useState, use, useEffect } from 'react'
 import type { Word } from '../../types/word'
-import styles from './page.module.scss'
+import CardList from '../app/components/CardList/CardList'
 
 export default function Home() {
   const [newWord, setNewWord] = useState<string>('')
   const [words, setWords] = useState<Word[]>([])
-  const [isFlipped, setIsFlipped] = useState<boolean>(false)
 
   const BASE_URL = 'http://localhost:8000'
 
@@ -74,56 +73,15 @@ export default function Home() {
       .catch((error) => console.warn(error))
   }
 
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped)
-  }
-
   return (
-    <main className={styles.main}>
+    <main>
       <form onSubmit={handleSubmit}>
         <p>単語・イディオムを追加</p>
         <input type='text' value={newWord} onChange={(e) => setNewWord(e.target.value)} />
         <button>追加</button>
       </form>
 
-      <ul className={styles.list}>
-        {words.map((word, index) => (
-          <li key={`${word.word}_${String(index)}`} className={styles.card} onClick={handleFlip}>
-            <div className={clsx(styles.cardInner, styles.front, isFlipped && styles.isFlipped)}>
-              <p>{word.word}</p>
-              {word.phonetics.map(
-                (pronunciation, index) =>
-                  pronunciation && (
-                    <p
-                      onClick={() => handlePronunciation(pronunciation.audio)}
-                      key={`${pronunciation.audio}_${String(index)}`}
-                    >
-                      発音
-                    </p>
-                  ),
-              )}
-            </div>
-
-            <div className={clsx(styles.cardInner, styles.back, isFlipped && styles.isFlipped)}>
-              {word.meanings.map((meaning, index) => (
-                <div key={`${meaning.definitions[0].definition}_meanings_${String(index)}`}>
-                  <p key={meaning.partOfSpeech}>{meaning.partOfSpeech}</p>
-                  {meaning.definitions.map((definition, index) => {
-                    const { definition: definitionDesc, example } = definition
-
-                    return (
-                      <div key={`${definitionDesc}_definition_${String(index)}`}>
-                        <p>意味：{definitionDesc}</p>
-                        {example && <p key={example}>例文：{example}</p>}
-                      </div>
-                    )
-                  })}
-                </div>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <CardList words={words} />
     </main>
   )
 }
