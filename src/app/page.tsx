@@ -1,37 +1,49 @@
 'use client'
 import axios, { AxiosResponse } from 'axios'
 import clsx from 'clsx'
+import { NextResponse } from 'next/server'
 import { FormEventHandler, useState, use, useEffect } from 'react'
 import type { Word } from '../../types/word'
 import styles from './page.module.scss'
 
 export default function Home() {
   const [newWord, setNewWord] = useState<string>('')
-  const [wordList, setWordList] = useState<Word[]>([])
+  const [words, setWords] = useState<Word[]>([])
   const [isFlipped, setIsFlipped] = useState<boolean>(false)
 
+  const BASE_URL = 'http://localhost:8000'
+
   useEffect(() => {
-    async function getWord() {
-      const response: AxiosResponse<Word[]> = await axios.get('http://localhost:3000/api/words')
+    async function fetchWords() {
+      try {
+        const res = await fetch(`${BASE_URL}/words`)
 
-      const { words } = response.data
+        const data = await res.json()
 
-      setWordList(words)
+        setWords(data)
+      } catch {
+        alert('There was an error loading')
+      }
     }
-
-    getWord()
+    fetchWords()
   }, [])
 
-  const postWord: AxiosResponse<Word> = async (word: Word) => {
-    const response = await axios.get('http://localhost:3000/api/words', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(word),
-    })
+  async function createWord(newWord) {
+    try {
+      const res = await fetch(`${BASE_URL}/words`, {
+        method: 'POST',
+        body: JSON.stringify(newWord),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
 
-    console.log(response)
+      const data = await res.json()
+
+      setWords((words) => [...words, data])
+    } catch {
+      alert('There was an error loading')
+    }
   }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -43,11 +55,11 @@ export default function Home() {
 
     const [word] = response.data
 
-    if (wordList.some((e) => e.word === word.word)) return
+    if (words.some((e) => e.word === word.word)) return
 
-    use(postWord(word))
+    await createWord(word)
 
-    setWordList([...wordList, word])
+    setWords([...words, word])
 
     setNewWord('')
   }
@@ -75,7 +87,7 @@ export default function Home() {
       </form>
 
       <ul className={styles.list}>
-        {wordList.map((word, index) => (
+        {words.map((word, index) => (
           <li key={`${word.word}_${String(index)}`} className={styles.card} onClick={handleFlip}>
             <div className={clsx(styles.cardInner, styles.front, isFlipped && styles.isFlipped)}>
               <p>{word.word}</p>
