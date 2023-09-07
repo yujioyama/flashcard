@@ -63,6 +63,19 @@ export default function Home() {
     setNewWord('')
   }
 
+  const handleDeleteWord = async (id) => {
+    console.log(id)
+    try {
+      await fetch(`${BASE_URL}/words/${String(id)}`, {
+        method: 'DELETE',
+      })
+
+      setWords((words) => words.filter((word) => word.id !== id))
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
     <main>
       <form onSubmit={handleSubmit}>
@@ -71,7 +84,7 @@ export default function Home() {
         <button>追加</button>
       </form>
 
-      <CardList words={words} />
+      <CardList words={words} onDeleteWord={handleDeleteWord} />
     </main>
   )
 }

@@ -5,9 +5,10 @@ import styles from './Card.module.scss'
 
 type Props = {
   word: Word
+  onDeleteWord: (word: Word) => void
 }
 
-const Card: React.FC<Props> = ({ word }) => {
+const Card: React.FC<Props> = ({ word, onDeleteWord }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false)
 
   const handlePronunciation = (pronunciation: string) => {
@@ -24,11 +25,15 @@ const Card: React.FC<Props> = ({ word }) => {
     setIsFlipped(!isFlipped)
   }
 
-  const { word: wordSpelling, phonetics, meanings } = word
+  const { word: wordSpelling, phonetics, meanings, id } = word
 
   return (
     <li className={styles.card} onClick={handleFlip}>
       <div className={clsx(styles.cardInner, styles.front, isFlipped && styles.isFlipped)}>
+        <p>編集</p>
+
+        <p onClick={() => onDeleteWord(id)}>削除</p>
+
         <p>{wordSpelling}</p>
         {phonetics &&
           phonetics.map(

@@ -10,10 +10,12 @@ export type Word = {
     partOfSpeech: string
     definitions: {
       definition: string
-      example: string
-      synonyms: string[]
-      antonyms: string[]
+      example?: string
+      synonyms?: string[]
+      antonyms?: string[]
     }[]
+    synonyms?: string[]
+    antonyms?: string[]
   }[]
   id: number
 }
