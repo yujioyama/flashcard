@@ -1,22 +1,22 @@
 {
   "words": [
     {
-      "word": "track",
-      "phonetic": "/tɹæk/",
+      "word": "apple",
+      "phonetic": "/ˈæp.əl/",
       "phonetics": [
         {
-          "text": "/tɹæk/",
-          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/track-au.mp3",
-          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=75899481",
+          "text": "/ˈæp.əl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/apple-uk.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=9014262",
           "license": {
-            "name": "BY-SA 4.0",
-            "url": "https://creativecommons.org/licenses/by-sa/4.0"
+            "name": "BY 3.0 US",
+            "url": "https://creativecommons.org/licenses/by/3.0/us"
           }
         },
         {
-          "text": "/tɹæk/",
-          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/track-us.mp3",
-          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=2079770",
+          "text": "/ˈæp.əl/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/apple-us.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=718877",
           "license": {
             "name": "BY-SA 3.0",
             "url": "https://creativecommons.org/licenses/by-sa/3.0"
@@ -28,229 +28,74 @@
           "partOfSpeech": "noun",
           "definitions": [
             {
-              "definition": "A mark left by something that has passed along.",
-              "synonyms": [
-                "trace",
-                "trail",
-                "wake"
-              ],
-              "antonyms": [],
-              "example": "Can you see any tracks in the snow?"
-            },
-            {
-              "definition": "A mark or impression left by the foot, either of man or animal.",
-              "synonyms": [
-                "footprint",
-                "impression"
-              ],
-              "antonyms": [],
-              "example": "The fox tracks were still visible in the snow."
-            },
-            {
-              "definition": "The entire lower surface of the foot; said of birds, etc.",
+              "definition": "A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates.",
               "synonyms": [],
               "antonyms": []
             },
             {
-              "definition": "A road or other similar beaten path.",
-              "synonyms": [
-                "path",
-                "road",
-                "way"
-              ],
-              "antonyms": [],
-              "example": "Follow the track for a hundred metres."
-            },
-            {
-              "definition": "Physical course; way.",
-              "synonyms": [
-                "course",
-                "path",
-                "trajectory",
-                "way"
-              ],
-              "antonyms": [],
-              "example": "Astronomers predicted the track of the comet."
-            },
-            {
-              "definition": "A path or course laid out for a race, for exercise, etc.",
-              "synonyms": [
-                "course",
-                "racetrack"
-              ],
-              "antonyms": [],
-              "example": "The athletes ran round the track."
-            },
-            {
-              "definition": "The direction and progress of someone or something; path.",
+              "definition": "Any of various tree-borne fruits or vegetables especially considered as resembling an apple; also (with qualifying words) used to form the names of other specific fruits such as custard apple, rose apple, thorn apple etc.",
               "synonyms": [],
               "antonyms": []
             },
             {
-              "definition": "The way or rails along which a train moves.",
-              "synonyms": [
-                "rails",
-                "railway",
-                "tracks",
-                "train tracks"
-              ],
-              "antonyms": [],
-              "example": "They briefly closed the railway to remove debris found on the track."
-            },
-            {
-              "definition": "A tract or area, such as of land.",
-              "synonyms": [
-                "area",
-                "parcel",
-                "region",
-                "tract"
-              ],
-              "antonyms": []
-            },
-            {
-              "definition": "The street, as a prostitute's place of work.",
+              "definition": "The fruit of the Tree of Knowledge, eaten by Adam and Eve according to post-Biblical Christian tradition; the forbidden fruit.",
               "synonyms": [],
               "antonyms": []
             },
             {
-              "definition": "Awareness of something, especially when arising from close monitoring.",
+              "definition": "A tree of the genus Malus, especially one cultivated for its edible fruit; the apple tree.",
               "synonyms": [],
               "antonyms": []
             },
             {
-              "definition": "The distance between two opposite wheels on a same axletree.",
-              "synonyms": [
-                "track width"
-              ],
-              "antonyms": []
-            },
-            {
-              "definition": "Short for caterpillar track.",
+              "definition": "The wood of the apple tree.",
               "synonyms": [],
               "antonyms": []
             },
             {
-              "definition": "The pitch.",
-              "synonyms": [
-                "ground",
-                "pitch"
-              ],
-              "antonyms": []
-            },
-            {
-              "definition": "Sound stored on a record.",
-              "synonyms": [
-                "recording"
-              ],
-              "antonyms": []
-            },
-            {
-              "definition": "The physical track on a record.",
-              "synonyms": [
-                "groove"
-              ],
-              "antonyms": []
-            },
-            {
-              "definition": "A song or other relatively short piece of music, on a record, separated from others by a short silence.",
-              "synonyms": [],
-              "antonyms": [],
-              "example": "My favourite track on the album is \"Sunshine\"."
-            },
-            {
-              "definition": "A circular (never-ending) data storage unit on a side of magnetic or optical disk, divided into sectors.",
+              "definition": "(in the plural) Short for apples and pears, slang for stairs.",
               "synonyms": [],
               "antonyms": []
             },
             {
-              "definition": "The racing events of track and field; track and field in general.",
-              "synonyms": [
-                "athletics",
-                "track and field"
-              ],
-              "antonyms": [],
-              "example": "I'm going to try out for track next week."
+              "definition": "The ball in baseball.",
+              "synonyms": [],
+              "antonyms": []
             },
             {
-              "definition": "A session talk on a conference.",
+              "definition": "When smiling, the round, fleshy part of the cheeks between the eyes and the corners of the mouth.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "A Native American or red-skinned person who acts and/or thinks like a white (Caucasian) person.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "(ice hockey slang) An assist.",
               "synonyms": [],
               "antonyms": []
             }
           ],
-          "synonyms": [
-            "area",
-            "parcel",
-            "region",
-            "tract",
-            "athletics",
-            "track and field",
-            "course",
-            "path",
-            "trajectory",
-            "way",
-            "course",
-            "racetrack",
-            "footprint",
-            "impression",
-            "groove",
-            "ground",
-            "pitch",
-            "path",
-            "road",
-            "way",
-            "rails",
-            "railway",
-            "tracks",
-            "train tracks",
-            "recording",
-            "trace",
-            "trail",
-            "wake",
-            "track width"
-          ],
+          "synonyms": [],
           "antonyms": []
         },
         {
           "partOfSpeech": "verb",
           "definitions": [
             {
-              "definition": "To continue over time.",
+              "definition": "To become apple-like.",
               "synonyms": [],
               "antonyms": []
             },
             {
-              "definition": "To follow the tracks of.",
-              "synonyms": [],
-              "antonyms": [],
-              "example": "My uncle spent all day tracking the deer, whose hoofprints were clear in the mud."
-            },
-            {
-              "definition": "To make tracks on.",
-              "synonyms": [],
-              "antonyms": []
-            },
-            {
-              "definition": "To create a musical recording (a track).",
-              "synonyms": [],
-              "antonyms": [],
-              "example": "Lil Kyle is gonna track with that DJ next week."
-            },
-            {
-              "definition": "To make sense; to be consistent with known information",
+              "definition": "To form buds.",
               "synonyms": [],
               "antonyms": []
             }
           ],
-          "synonyms": [
-            "check out",
-            "make sense",
-            "find",
-            "locate",
-            "trace",
-            "track down",
-            "follow",
-            "monitor"
-          ],
+          "synonyms": [],
           "antonyms": []
         }
       ],
@@ -259,9 +104,158 @@
         "url": "https://creativecommons.org/licenses/by-sa/3.0"
       },
       "sourceUrls": [
-        "https://en.wiktionary.org/wiki/track"
+        "https://en.wiktionary.org/wiki/apple"
       ],
-      "id": 3
+      "id": 1
+    },
+    {
+      "word": "end",
+      "phonetic": "/ɛnd/",
+      "phonetics": [
+        {
+          "text": "/ɛnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/end-au.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=75899610",
+          "license": {
+            "name": "BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0"
+          }
+        },
+        {
+          "text": "/ɛnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/end-uk.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=9027993",
+          "license": {
+            "name": "BY 3.0 US",
+            "url": "https://creativecommons.org/licenses/by/3.0/us"
+          }
+        },
+        {
+          "text": "/ɛnd/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/end-us.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=711091",
+          "license": {
+            "name": "BY-SA 3.0",
+            "url": "https://creativecommons.org/licenses/by-sa/3.0"
+          }
+        }
+      ],
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "The terminal point of something in space or time.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "At the end of the road, turn left."
+            },
+            {
+              "definition": "(by extension) The cessation of an effort, activity, state, or motion.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Is there no end to this madness?"
+            },
+            {
+              "definition": "(by extension) Death.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "He met a terrible end in the jungle."
+            },
+            {
+              "definition": "The most extreme point of an object, especially one that is longer than it is wide.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hold the string at both ends."
+            },
+            {
+              "definition": "Result.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "A purpose, goal, or aim.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "One of the two parts of the ground used as a descriptive name for half of the ground.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "The Pavillion End"
+            },
+            {
+              "definition": "The position at the end of either the offensive or defensive line, a tight end, a split end, a defensive end.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "A period of play in which each team throws eight rocks, two per player, in alternating fashion.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "An ideal point of a graph or other complex.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "That which is left; a remnant; a fragment; a scrap.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "odds and ends"
+            },
+            {
+              "definition": "One of the yarns of the worsted warp in a Brussels carpet.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "(in the plural) Money.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Don't give them your ends. You jack that shit!"
+            }
+          ],
+          "synonyms": [
+            "conclusion",
+            "limit",
+            "termination",
+            "terminus"
+          ],
+          "antonyms": [
+            "beginning",
+            "start"
+          ]
+        },
+        {
+          "partOfSpeech": "verb",
+          "definitions": [
+            {
+              "definition": "To come to an end",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Is this movie never going to end?"
+            },
+            {
+              "definition": "To finish, terminate.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "The referee blew the whistle to end the game."
+            }
+          ],
+          "synonyms": [],
+          "antonyms": []
+        }
+      ],
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      "sourceUrls": [
+        "https://en.wiktionary.org/wiki/end"
+      ],
+      "id": 2
     }
   ]
 }

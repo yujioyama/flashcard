@@ -12,8 +12,8 @@ const CardList: React.FC<Props> = ({ words, onDeleteWord }) => {
 
   return (
     <ul className={styles.list}>
-      {words.map((word, index) => (
-        <Card word={word} key={word.id} onDeleteWord={onDeleteWord} />
+      {words.map((word) => (
+        <Card word={word} key={String(word.id)} onDeleteWord={onDeleteWord} />
       ))}
     </ul>
   )
