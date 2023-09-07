@@ -63,16 +63,6 @@ export default function Home() {
     setNewWord('')
   }
 
-  const handlePronunciation = (pronunciation: string) => {
-    const audio = new Audio(pronunciation)
-    audio
-      .play()
-      .then(() => {
-        console.log('Audio started!')
-      })
-      .catch((error) => console.warn(error))
-  }
-
   return (
     <main>
       <form onSubmit={handleSubmit}>

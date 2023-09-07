@@ -15,4 +15,5 @@ export type Word = {
       antonyms: string[]
     }[]
   }[]
+  id: number
 }
