@@ -12,11 +12,20 @@ import Modal from './components/Modal/Modal'
 import styles from './page.module.scss'
 
 const Home = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [selectedModal, setSelectedModal] = useState<string>('')
 
-  const handleModalOpen = () => setIsOpen(true)
+  const handleModalOpen = (event) => {
+    event.preventDefault()
 
-  const handleModalClose = () => setIsOpen(false)
+    const {
+      target: {
+        dataset: { modal },
+      },
+    } = event
+    if (modal) setSelectedModal(modal)
+  }
+
+  const handleModalClose = () => setSelectedModal('')
 
   return (
     <Main>
@@ -28,10 +37,14 @@ const Home = () => {
             <ActionButton type='isEdit'>編集</ActionButton>
           </div>
           <div className={styles.actionBoxButton}>
-            <ActionButton type='isAdd' onClick={handleModalOpen}>
+            <ActionButton type='isAdd' onClick={handleModalOpen} dataModal='add'>
               追加
             </ActionButton>
-            <Modal isOpen={isOpen} onClose={handleModalClose} title='新しく単語を追加する'>
+            <Modal
+              isOpen={selectedModal === 'add'}
+              onClose={handleModalClose}
+              title='新しく単語を追加する'
+            >
               <div className={styles.row}>
                 <div className={styles.input}>
                   <InputText />
@@ -44,10 +57,16 @@ const Home = () => {
       </div>
 
       <MainInner>
-        <List>
-          <ListItem word='apple' />
-          <ListItem word='apple' />
-          <ListItem word='apple' />
+        <List onModalOpen={handleModalOpen}>
+          {['apple', 'banana', 'cherry'].map((item, index) => (
+            <ListItem
+              onModalOpen={handleModalOpen}
+              word={item}
+              key={index}
+              onClose={handleModalClose}
+              selectedModal={selectedModal}
+            />
+          ))}
         </List>
 
         <div className={styles.buttonBox}>
