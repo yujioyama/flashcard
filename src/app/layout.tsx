@@ -1,9 +1,12 @@
 import './styles/reset.css'
 import './styles/globals.css'
+import clsx from 'clsx'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Noto_Sans_JP } from 'next/font/google'
+import Header from './components/Header/Header'
+import styles from './layout.module.scss'
 
-const inter = Inter({ subsets: ['latin'] })
+const notojp = Noto_Sans_JP({ weight: ['400', '700'], subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,7 +16,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ja'>
-      <body className={inter.className}>{children}</body>
+      <body className={clsx(notojp.className, styles.body)}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }

@@ -1,0 +1,9 @@
+@use './styles/_variables';
+
+.body {
+  display: flex;
+  flex-direction: column;
+  font-weight: variables.$font-regular;
+  color: variables.$black;
+  background-color: variables.$main;
+}

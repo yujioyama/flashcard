@@ -1,90 +1,51 @@
-'use client'
-import axios, { AxiosResponse } from 'axios'
 import clsx from 'clsx'
-import { NextResponse } from 'next/server'
-import { FormEventHandler, useState, use, useEffect } from 'react'
-import type { Word } from './types/word'
-import CardList from '../app/components/CardList/CardList'
+import ActionButton from './components/ActionButton/ActionButton'
+import styles from './page.module.scss'
 
-export default function Home() {
-  const [newWord, setNewWord] = useState<string>('')
-  const [words, setWords] = useState<Word[]>([])
-
-  const BASE_URL = 'http://localhost:8000'
-
-  useEffect(() => {
-    async function fetchWords() {
-      try {
-        const res = await fetch(`${BASE_URL}/words`)
-
-        const data = await res.json()
-
-        setWords(data)
-      } catch {
-        alert('There was an error loading')
-      }
-    }
-    fetchWords()
-  }, [])
-
-  async function createWord(newWord) {
-    try {
-      const res = await fetch(`${BASE_URL}/words`, {
-        method: 'POST',
-        body: JSON.stringify(newWord),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-
-      const data = await res.json()
-
-      setWords((words) => [...words, data])
-    } catch {
-      alert('There was an error loading')
-    }
-  }
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-    event.preventDefault()
-
-    const response: AxiosResponse<Word[]> = await axios.get(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
-    )
-
-    const [word] = response.data
-
-    if (words.some((e) => e.word === word.word)) return
-
-    await createWord(word)
-
-    setWords([...words, word])
-
-    setNewWord('')
-  }
-
-  const handleDeleteWord = async (id) => {
-    console.log(id)
-    try {
-      await fetch(`${BASE_URL}/words/${String(id)}`, {
-        method: 'DELETE',
-      })
-
-      setWords((words) => words.filter((word) => word.id !== id))
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-
+const page = () => {
   return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <p>単語・イディオムを追加</p>
-        <input type='text' value={newWord} onChange={(e) => setNewWord(e.target.value)} />
-        <button>追加</button>
-      </form>
+    <div className={styles.main}>
+      <div className={styles.headingBox}>
+        <h2 className={styles.heading}>単語リスト</h2>
 
-      <CardList words={words} onDeleteWord={handleDeleteWord} />
-    </main>
+        <div className={styles.actionBox}>
+          <div className={styles.actionBoxButton}>
+            <ActionButton type='isEdit'>編集</ActionButton>
+          </div>
+          <div className={styles.actionBoxButton}>
+            <ActionButton type='isAdd'>追加</ActionButton>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.mainInner}>
+        <ul className={styles.list}>
+          <li className={styles.item}>
+            <a href='' className={styles.link}>
+              apple
+            </a>
+          </li>
+          <li className={styles.item}>
+            <a href='' className={styles.link}>
+              apple
+            </a>
+          </li>
+
+          <li className={styles.item}>
+            <a href='' className={styles.link}>
+              apple
+            </a>
+          </li>
+        </ul>
+
+        <div className={styles.buttonBox}>
+          <a href='' className={styles.button}>
+            テストを開始する
+          </a>
+        </div>
+      </div>
+    </div>
   )
 }
+
+export default page
