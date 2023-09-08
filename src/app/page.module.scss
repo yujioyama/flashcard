@@ -1,23 +1,11 @@
 @use './styles/variables';
 
-.main {
-  display: block;
-  flex-grow: 1;
-  padding-top: 70px;
-  background-color: variables.$main-light;
-  border-radius: 50px 50px 0 0;
-}
-
 .headingBox {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 880px;
   margin: 0 auto;
-}
-
-.heading {
-  font-size: 36px;
-  font-weight: variables.$font-bold;
 }
 
 .actionBox {
@@ -28,42 +16,6 @@
   margin-left: 25px;
   &:first-child {
     margin-left: 0;
-  }
-}
-
-.mainInner {
-  width: 700px;
-  margin: 45px auto 0;
-}
-
-.list {
-}
-
-.item {
-  margin-top: 30px;
-
-  &:first-child {
-    margin-top: 0;
-  }
-}
-
-.link {
-  position: relative;
-  display: block;
-  padding: 26px 30px 25px;
-  font-size: 20px;
-  background: variables.$white;
-  border-radius: 10px;
-
-  &::before {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-    content: '';
-    background-image: url('/icons/black/arrow_right.svg');
-    transform: translateY(-50%);
   }
 }
 
@@ -82,5 +34,24 @@
   color: variables.$white;
   text-align: center;
   background: variables.$blue;
+  border-radius: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.input {
+  flex-grow: 1;
+}
+
+.add {
+  padding: 15px 20px;
+  margin-left: 30px;
+  font-size: 16px;
+  font-weight: variables.$font-bold;
+  color: variables.$white;
+  background: variables.$blue;
+  background-color: variables.$blue;
   border-radius: 10px;
 }

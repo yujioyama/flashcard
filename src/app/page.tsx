@@ -1,51 +1,63 @@
+'use client'
 import clsx from 'clsx'
+import { useState } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
+import Heading from './components/Heading/Heading'
+import InputText from './components/InputText/InputText'
+import List from './components/List/List'
+import ListItem from './components/ListItem/ListItem'
+import Main from './components/Main/Main'
+import MainInner from './components/MainInner/MainInner'
+import Modal from './components/Modal/Modal'
 import styles from './page.module.scss'
 
-const page = () => {
+const Home = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleModalOpen = () => setIsOpen(true)
+
+  const handleModalClose = () => setIsOpen(false)
+
   return (
-    <div className={styles.main}>
+    <Main>
       <div className={styles.headingBox}>
-        <h2 className={styles.heading}>単語リスト</h2>
+        <Heading>単語リスト</Heading>
 
         <div className={styles.actionBox}>
           <div className={styles.actionBoxButton}>
             <ActionButton type='isEdit'>編集</ActionButton>
           </div>
           <div className={styles.actionBoxButton}>
-            <ActionButton type='isAdd'>追加</ActionButton>
+            <ActionButton type='isAdd' onClick={handleModalOpen}>
+              追加
+            </ActionButton>
+            <Modal isOpen={isOpen} onClose={handleModalClose} title='新しく単語を追加する'>
+              <div className={styles.row}>
+                <div className={styles.input}>
+                  <InputText />
+                </div>
+                <button className={styles.add}>追加</button>
+              </div>
+            </Modal>
           </div>
         </div>
       </div>
 
-      <div className={styles.mainInner}>
-        <ul className={styles.list}>
-          <li className={styles.item}>
-            <a href='' className={styles.link}>
-              apple
-            </a>
-          </li>
-          <li className={styles.item}>
-            <a href='' className={styles.link}>
-              apple
-            </a>
-          </li>
-
-          <li className={styles.item}>
-            <a href='' className={styles.link}>
-              apple
-            </a>
-          </li>
-        </ul>
+      <MainInner>
+        <List>
+          <ListItem word='apple' />
+          <ListItem word='apple' />
+          <ListItem word='apple' />
+        </List>
 
         <div className={styles.buttonBox}>
           <a href='' className={styles.button}>
             テストを開始する
           </a>
         </div>
-      </div>
-    </div>
+      </MainInner>
+    </Main>
   )
 }
 
-export default page
+export default Home
