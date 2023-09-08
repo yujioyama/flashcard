@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useState } from 'react'
-import type { Word } from '../../../../types/word'
+import type { Word } from '../../types/word'
 import styles from './Card.module.scss'
 
 type Props = {

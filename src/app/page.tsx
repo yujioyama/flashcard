@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 import clsx from 'clsx'
 import { NextResponse } from 'next/server'
 import { FormEventHandler, useState, use, useEffect } from 'react'
-import type { Word } from '../../types/word'
+import type { Word } from './types/word'
 import CardList from '../app/components/CardList/CardList'
 
 export default function Home() {
