@@ -8,15 +8,15 @@ type Props = {
   word: Word
   onClose: () => void
   selectedModal: string
-  isEdit: boolean
+  isEditing: boolean
 }
 
-const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEdit }) => {
+const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEditing }) => {
   const { word: wordSpelling, meanings } = word
 
   return (
     <li className={styles.item}>
-      {isEdit ? (
+      {isEditing ? (
         <div className={clsx(styles.button, styles.isEdit)}>
           {wordSpelling}
           <div className={styles.actionBox}>

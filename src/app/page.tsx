@@ -17,6 +17,7 @@ const Home = () => {
   const [selectedModal, setSelectedModal] = useState<string>('')
   const [words, setWords] = useState<Word[]>([])
   const [newWord, setNewWord] = useState<string>('')
+  const [isEditing, setIsEditing] = useState<boolean>(false)
 
   const BASE_URL = 'http://localhost:8000'
 
@@ -89,6 +90,11 @@ const Home = () => {
     setSelectedModal('')
   }
 
+  const handleSwitchEdit = (event) => {
+    event.preventDefault()
+    setIsEditing(!isEditing)
+  }
+
   return (
     <Main>
       <div className={styles.headingBox}>
@@ -96,7 +102,9 @@ const Home = () => {
 
         <div className={styles.actionBox}>
           <div className={styles.actionBoxButton}>
-            <ActionButton type='isEdit'>編集</ActionButton>
+            <ActionButton type='isEdit' onSwitchEdit={handleSwitchEdit} isEditing={isEditing}>
+              編集
+            </ActionButton>
           </div>
           <div className={styles.actionBoxButton}>
             <ActionButton type='isAdd' onClick={handleModalOpen} dataModal='add'>
@@ -122,7 +130,7 @@ const Home = () => {
         <List onModalOpen={handleModalOpen}>
           {words.map((word) => (
             <ListItem
-              isEdit={false}
+              isEditing={isEditing}
               onModalOpen={handleModalOpen}
               word={word}
               key={word.id}
