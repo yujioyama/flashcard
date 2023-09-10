@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import type { Word } from '../../types/word'
 import Modal from '../Modal/Modal'
 import styles from './ListItem.module.scss'
@@ -6,16 +7,28 @@ type Props = {
   word: Word
   onClose: () => void
   selectedModal: string
+  isEdit: boolean
 }
 
-const ListItem: React.FC<Props> = ({ word, onClose, selectedModal }) => {
+const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEdit }) => {
   const { word: wordSpelling, meanings } = word
 
   return (
     <li className={styles.item}>
-      <button className={styles.link} data-modal={wordSpelling}>
-        {wordSpelling}
-      </button>
+      {isEdit ? (
+        <div className={clsx(styles.button, styles.isEdit)}>
+          {wordSpelling}
+          <div className={styles.actionBox}>
+            <button className={clsx(styles.iconButton, styles.isEdit)}>編集</button>
+            <button className={clsx(styles.iconButton, styles.isDelete)}>削除</button>
+          </div>
+        </div>
+      ) : (
+        <button className={styles.button} data-modal={wordSpelling}>
+          {wordSpelling}
+        </button>
+      )}
+
       <Modal title={wordSpelling} onClose={onClose} isOpen={selectedModal === wordSpelling}>
         <ul className={styles.listLarge}>
           {meanings.map((meaning, index) => {

@@ -121,6 +121,7 @@ const Home = () => {
         <List onModalOpen={handleModalOpen}>
           {words.map((word) => (
             <ListItem
+              isEdit={true}
               onModalOpen={handleModalOpen}
               word={word}
               key={word.id}

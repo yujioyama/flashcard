@@ -1,10 +1,12 @@
 @use '../../styles/variables';
 
-.link {
+.button {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
-  padding: 26px 30px 25px;
+  height: 80px;
+  padding: 0 10px 0 30px;
   font-size: 20px;
   background: variables.$white;
   border-radius: 10px;
@@ -20,6 +22,15 @@
     background-image: url('/icons/black/arrow_right.svg');
     transform: translateY(-50%);
   }
+
+  &.isEdit {
+    display: flex;
+    justify-content: space-between;
+
+    &::before {
+      content: none;
+    }
+  }
 }
 
 .item {
@@ -27,6 +38,28 @@
 
   &:first-child {
     margin-top: 0;
+  }
+}
+
+.actionBox {
+  display: flex;
+  height: 100%;
+}
+
+.iconButton {
+  width: 60px;
+  height: 100%;
+  font-size: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50px;
+
+  &.isEdit {
+    background-image: url('/icons/yellow/edit.svg');
+  }
+
+  &.isDelete {
+    background-image: url('/icons/red/delete.svg');
   }
 }
 
