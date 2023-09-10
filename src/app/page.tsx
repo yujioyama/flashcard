@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
+import ExecuteButton from './components/ExecuteButton/ExecuteButton'
 import Heading from './components/Heading/Heading'
 import InputText from './components/InputText/InputText'
 import List from './components/List/List'
@@ -110,7 +111,7 @@ const Home = () => {
                 <div className={styles.input}>
                   <InputText onChange={handleChange} newWord={newWord} />
                 </div>
-                <button className={styles.add}>追加</button>
+                <ExecuteButton>追加</ExecuteButton>
               </form>
             </Modal>
           </div>
@@ -121,7 +122,7 @@ const Home = () => {
         <List onModalOpen={handleModalOpen}>
           {words.map((word) => (
             <ListItem
-              isEdit={true}
+              isEdit={false}
               onModalOpen={handleModalOpen}
               word={word}
               key={word.id}

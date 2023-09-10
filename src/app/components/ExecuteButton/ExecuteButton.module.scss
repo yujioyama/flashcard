@@ -1,0 +1,12 @@
+@use '../../styles/variables';
+
+.button {
+  padding: 15px 20px;
+  margin-left: 30px;
+  font-size: 16px;
+  font-weight: variables.$font-bold;
+  color: variables.$white;
+  background: variables.$blue;
+  background-color: variables.$blue;
+  border-radius: 10px;
+}

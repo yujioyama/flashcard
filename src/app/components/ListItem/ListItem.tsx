@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import type { Word } from '../../types/word'
+import DefinitionList from '../DefinitionList/DefinitionList'
 import Modal from '../Modal/Modal'
 import styles from './ListItem.module.scss'
 
@@ -40,29 +41,7 @@ const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEdit }) => 
                   <span className={styles.partOfSpeech}>{partOfSpeech}</span>
                 </div>
 
-                <dl className={styles.listMedium} key={index}>
-                  {definitions.map((definition, index) => {
-                    const { definition: definitionDescription, example } = definition
-
-                    return (
-                      <div className={styles.itemMedium} key={definitionDescription}>
-                        <div className={styles.row}>
-                          <dt className={styles.title}>意味</dt>
-                          <dd className={styles.definition}>{definitionDescription}</dd>
-                        </div>
-
-                        {example && (
-                          <div className={styles.row}>
-                            <dt className={styles.title}>例文</dt>
-                            <dd className={styles.definition}>{example}</dd>
-                          </div>
-                        )}
-
-                        <span className={styles.number}>{String(index + 1)}</span>
-                      </div>
-                    )
-                  })}
-                </dl>
+                <DefinitionList definitions={definitions} index={index} />
               </li>
             )
           })}
