@@ -1,6 +1,6 @@
 'use client'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
 import Heading from './components/Heading/Heading'
 import InputText from './components/InputText/InputText'
@@ -13,6 +13,24 @@ import styles from './page.module.scss'
 
 const Home = () => {
   const [selectedModal, setSelectedModal] = useState<string>('')
+  const [words, setWords] = useState<Word[]>([])
+
+  const BASE_URL = 'http://localhost:8000'
+
+  useEffect(() => {
+    async function fetchWords() {
+      try {
+        const res = await fetch(`${BASE_URL}/words`)
+
+        const data = await res.json()
+
+        setWords(data)
+      } catch {
+        alert('There was an error loading')
+      }
+    }
+    fetchWords()
+  }, [])
 
   const handleModalOpen = (event) => {
     event.preventDefault()
@@ -58,11 +76,11 @@ const Home = () => {
 
       <MainInner>
         <List onModalOpen={handleModalOpen}>
-          {['apple', 'banana', 'cherry'].map((item, index) => (
+          {words.map((word) => (
             <ListItem
               onModalOpen={handleModalOpen}
-              word={item}
-              key={index}
+              word={word}
+              key={word.id}
               onClose={handleModalClose}
               selectedModal={selectedModal}
             />

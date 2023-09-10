@@ -27,7 +27,8 @@
   z-index: 250;
   width: 100%;
   max-width: 700px;
-  overflow: hidden;
+  max-height: 80%;
+  overflow: auto;
   visibility: hidden;
   border-radius: 20px;
   opacity: 0;
@@ -43,7 +44,10 @@
 }
 
 .header {
-  position: relative;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
   padding: 20px 0;
   background: variables.$main;
 }
