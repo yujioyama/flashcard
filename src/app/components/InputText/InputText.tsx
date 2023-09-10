@@ -1,9 +1,14 @@
 import styles from './InputText.module.scss'
 
-const InputText = () => {
+type Props = {
+  onChange: () => void
+  newWord: string
+}
+
+const InputText = ({ onChange, newWord }) => {
   return (
     <div className={styles.inputWrapper}>
-      <input type='text' className={styles.input} />
+      <input type='text' value={newWord} className={styles.input} onChange={onChange} />
     </div>
   )
 }

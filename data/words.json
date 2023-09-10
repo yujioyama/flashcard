@@ -256,6 +256,393 @@
         "https://en.wiktionary.org/wiki/end"
       ],
       "id": 2
+    },
+    {
+      "word": "hello",
+      "phonetics": [
+        {
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=75797336",
+          "license": {
+            "name": "BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0"
+          }
+        },
+        {
+          "text": "/həˈləʊ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-uk.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=9021983",
+          "license": {
+            "name": "BY 3.0 US",
+            "url": "https://creativecommons.org/licenses/by/3.0/us"
+          }
+        },
+        {
+          "text": "/həˈloʊ/",
+          "audio": ""
+        }
+      ],
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "\"Hello!\" or an equivalent greeting.",
+              "synonyms": [],
+              "antonyms": []
+            }
+          ],
+          "synonyms": [
+            "greeting"
+          ],
+          "antonyms": []
+        },
+        {
+          "partOfSpeech": "verb",
+          "definitions": [
+            {
+              "definition": "To greet with \"hello\".",
+              "synonyms": [],
+              "antonyms": []
+            }
+          ],
+          "synonyms": [],
+          "antonyms": []
+        },
+        {
+          "partOfSpeech": "interjection",
+          "definitions": [
+            {
+              "definition": "A greeting (salutation) said when meeting someone or acknowledging someone’s arrival or presence.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hello, everyone."
+            },
+            {
+              "definition": "A greeting used when answering the telephone.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hello? How may I help you?"
+            },
+            {
+              "definition": "A call for response if it is not clear if anyone is present or listening, or if a telephone conversation may have been disconnected.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hello? Is anyone there?"
+            },
+            {
+              "definition": "Used sarcastically to imply that the person addressed or referred to has done something the speaker or writer considers to be foolish.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "You just tried to start your car with your cell phone. Hello?"
+            },
+            {
+              "definition": "An expression of puzzlement or discovery.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hello! What’s going on here?"
+            }
+          ],
+          "synonyms": [],
+          "antonyms": [
+            "bye",
+            "goodbye"
+          ]
+        }
+      ],
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      "sourceUrls": [
+        "https://en.wiktionary.org/wiki/hello"
+      ],
+      "id": 3
+    },
+    {
+      "word": "hey",
+      "phonetic": "/heɪ/",
+      "phonetics": [
+        {
+          "text": "/heɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hey-au.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=75271853",
+          "license": {
+            "name": "BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0"
+          }
+        },
+        {
+          "text": "/heɪ/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/hey-us.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=268428"
+        }
+      ],
+      "meanings": [
+        {
+          "partOfSpeech": "interjection",
+          "definitions": [
+            {
+              "definition": "An exclamation to get attention.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hey! Listen!"
+            },
+            {
+              "definition": "A protest or reprimand.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hey! Stop that!"
+            },
+            {
+              "definition": "An expression of surprise.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hey! This is new!"
+            },
+            {
+              "definition": "An informal greeting, similar to hi.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hey! How's it going?"
+            },
+            {
+              "definition": "A request for repetition or explanation; an expression of confusion.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "Hey? How's that?"
+            },
+            {
+              "definition": "A meaningless beat marker or extra, filler syllable in song lyrics.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "The chorus is \"nana na na, nana na na hey hey hey, goodbye\"."
+            }
+          ],
+          "synonyms": [
+            "oi",
+            "yo",
+            "blimey",
+            "gee whiz",
+            "yowzah",
+            "eh",
+            "huh",
+            "hi",
+            "howdy",
+            "wotcher"
+          ],
+          "antonyms": []
+        }
+      ],
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      "sourceUrls": [
+        "https://en.wiktionary.org/wiki/hey"
+      ],
+      "id": 4
+    },
+    {
+      "word": "what",
+      "phonetic": "/wɔt/",
+      "phonetics": [
+        {
+          "text": "/wɔt/",
+          "audio": ""
+        },
+        {
+          "text": "/wʌt/",
+          "audio": ""
+        },
+        {
+          "text": "[wʌɾ]",
+          "audio": ""
+        },
+        {
+          "text": "/wɒt/",
+          "audio": ""
+        },
+        {
+          "text": "/wɒt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/what-uk.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=9028960",
+          "license": {
+            "name": "BY 3.0 US",
+            "url": "https://creativecommons.org/licenses/by/3.0/us"
+          }
+        },
+        {
+          "text": "/wɒt/",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/what-us.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=84903339",
+          "license": {
+            "name": "BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0"
+          }
+        },
+        {
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/what-us-stressed.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=37582860",
+          "license": {
+            "name": "BY-SA 3.0",
+            "url": "https://creativecommons.org/licenses/by-sa/3.0"
+          }
+        },
+        {
+          "text": "[wʌɾ]",
+          "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/what-us-unstressed.mp3",
+          "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=78441524",
+          "license": {
+            "name": "BY-SA 4.0",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0"
+          }
+        }
+      ],
+      "meanings": [
+        {
+          "partOfSpeech": "adverb",
+          "definitions": [
+            {
+              "definition": "(Singlish) Used to contradict an underlying assumption held by the interlocutor.",
+              "synonyms": [],
+              "antonyms": []
+            }
+          ],
+          "synonyms": [],
+          "antonyms": []
+        },
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "Something; thing; stuff.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "The identity of a thing, as an answer to a question of what.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "Something that is addressed by what, as opposed to a person, addressed by who.",
+              "synonyms": [],
+              "antonyms": []
+            }
+          ],
+          "synonyms": [],
+          "antonyms": []
+        },
+        {
+          "partOfSpeech": "adverb",
+          "definitions": [
+            {
+              "definition": "(usually followed by \"with,\" but also sometimes \"would\" or \"might,\" especially in finance) In some manner or degree; in part; partly. See also what with",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "The market will calculate these higher risks in their funding costs what might result in higher lending rates."
+            },
+            {
+              "definition": "Such.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "What a beautiful day!"
+            },
+            {
+              "definition": "Why.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "Used to introduce each of two coordinate phrases or concepts; both…and.",
+              "synonyms": [],
+              "antonyms": []
+            }
+          ],
+          "synonyms": [
+            "such"
+          ],
+          "antonyms": []
+        },
+        {
+          "partOfSpeech": "pronoun",
+          "definitions": [
+            {
+              "definition": "(interrogative) Which thing, event, circumstance, etc.: used interrogatively in asking for the specification of an identity, quantity, quality, etc.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "That which; those that; the thing that.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "He knows what he wants."
+            },
+            {
+              "definition": "(relative) That; which; who.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "Whatever.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "I will do what I can to help you."
+            }
+          ],
+          "synonyms": [],
+          "antonyms": []
+        },
+        {
+          "partOfSpeech": "interjection",
+          "definitions": [
+            {
+              "definition": "An expression of surprise or disbelief.",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "What do you want? An abrupt, usually unfriendly enquiry as to what a person desires.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "What? I'm busy."
+            },
+            {
+              "definition": "Clipping of what do you say?",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "What did you say? I beg your pardon?",
+              "synonyms": [],
+              "antonyms": []
+            },
+            {
+              "definition": "(typically with a) An intensifier to an adjective phrase; used to begin a sentence.",
+              "synonyms": [],
+              "antonyms": [],
+              "example": "What a nice car."
+            }
+          ],
+          "synonyms": [
+            "what-what",
+            "wot",
+            "come again",
+            "pardon"
+          ],
+          "antonyms": []
+        }
+      ],
+      "license": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      "sourceUrls": [
+        "https://en.wiktionary.org/wiki/wat",
+        "https://en.wiktionary.org/wiki/what"
+      ],
+      "id": 5
     }
   ]
 }

@@ -1,4 +1,5 @@
 'use client'
+import axios, { AxiosResponse } from 'axios'
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
@@ -14,6 +15,7 @@ import styles from './page.module.scss'
 const Home = () => {
   const [selectedModal, setSelectedModal] = useState<string>('')
   const [words, setWords] = useState<Word[]>([])
+  const [newWord, setNewWord] = useState<string>('')
 
   const BASE_URL = 'http://localhost:8000'
 
@@ -45,6 +47,47 @@ const Home = () => {
 
   const handleModalClose = () => setSelectedModal('')
 
+  async function createWord(newWord) {
+    try {
+      const res = await fetch(`${BASE_URL}/words`, {
+        method: 'POST',
+        body: JSON.stringify(newWord),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      const data = await res.json()
+
+      setWords((words) => [...words, data])
+    } catch {
+      alert('There was an error loading')
+    }
+  }
+
+  const handleChange = (event) => {
+    setNewWord(event.target.value)
+  }
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault()
+
+    const response: AxiosResponse<Word[]> = await axios.get(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
+    )
+
+    const [word] = response.data
+
+    if (words.some((e) => e.word === word.word)) return
+
+    await createWord(word)
+
+    setWords([...words, word])
+
+    setNewWord('')
+    setSelectedModal('')
+  }
+
   return (
     <Main>
       <div className={styles.headingBox}>
@@ -63,12 +106,12 @@ const Home = () => {
               onClose={handleModalClose}
               title='新しく単語を追加する'
             >
-              <div className={styles.row}>
+              <form className={styles.row} onSubmit={handleSubmit}>
                 <div className={styles.input}>
-                  <InputText />
+                  <InputText onChange={handleChange} newWord={newWord} />
                 </div>
                 <button className={styles.add}>追加</button>
-              </div>
+              </form>
             </Modal>
           </div>
         </div>
