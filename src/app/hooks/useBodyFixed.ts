@@ -40,5 +40,3 @@ export const useBodyFixed = () => {
 
   return { bodyFixed, setBodyFixed }
 }
-
-export default useBodyFixed

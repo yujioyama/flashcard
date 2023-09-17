@@ -11,7 +11,7 @@ import ListItem from './components/ListItem/ListItem'
 import Main from './components/Main/Main'
 import MainInner from './components/MainInner/MainInner'
 import Modal from './components/Modal/Modal'
-import useBodyFixed from './hooks/useBodyFixed'
+import { useBodyFixed } from './hooks/useBodyFixed'
 import styles from './page.module.scss'
 import type { Word } from './types/word'
 
