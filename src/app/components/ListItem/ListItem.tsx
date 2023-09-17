@@ -11,8 +11,8 @@ type Props = {
   onModalOpen: (event: MouseEvent<HTMLButtonElement>, word: Word) => void
 }
 
-const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEditing, onModalOpen }) => {
-  const { word: wordSpelling, meanings } = word
+const ListItem: React.FC<Props> = ({ word, isEditing, onModalOpen }) => {
+  const { word: wordSpelling, id } = word
 
   return (
     <li className={styles.item}>
@@ -21,7 +21,13 @@ const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEditing, on
           {wordSpelling}
           <div className={styles.actionBox}>
             <button className={clsx(styles.iconButton, styles.isEdit)}>編集</button>
-            <button className={clsx(styles.iconButton, styles.isDelete)}>削除</button>
+            <button
+              className={clsx(styles.iconButton, styles.isDelete)}
+              onClick={(event) => onModalOpen(event, word)}
+              data-modal='modal-delete'
+            >
+              削除
+            </button>
           </div>
         </div>
       ) : (

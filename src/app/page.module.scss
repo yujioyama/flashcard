@@ -44,3 +44,17 @@
 .input {
   flex-grow: 1;
 }
+
+.addButton {
+  margin-left: 30px;
+}
+
+.deleteMessage {
+  text-align: center;
+}
+
+.deleteButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}

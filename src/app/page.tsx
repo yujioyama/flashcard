@@ -24,12 +24,12 @@ const Home = () => {
 
   const { setBodyFixed } = useBodyFixed()
 
-  const BASE_URL = 'http://localhost:8000'
+  const BASE_URL = 'http://localhost:8000/words'
 
   useEffect(() => {
     async function fetchWords() {
       try {
-        const res = await fetch(`${BASE_URL}/words`)
+        const res = await fetch(`${BASE_URL}`)
 
         const data = await res.json()
 
@@ -43,7 +43,7 @@ const Home = () => {
 
   async function createWord(newWord: Word) {
     try {
-      const { data } = await axios.post(`${BASE_URL}/words`, newWord)
+      const { data } = await axios.post(`${BASE_URL}`, newWord)
 
       setWords((words) => [...words, data])
     } catch {
@@ -51,9 +51,17 @@ const Home = () => {
     }
   }
 
-  const handleModalOpen = (event: MouseEvent<HTMLButtonElement>, word: Word) => {
-    event.preventDefault()
+  async function deleteWord(id: number) {
+    try {
+      await axios.delete(`${BASE_URL}/${id}`)
 
+      setWords((words) => words.filter((word) => word.id !== id))
+    } catch {
+      alert('There was an error deleting')
+    }
+  }
+
+  const handleModalOpen = (event: MouseEvent<HTMLButtonElement>, word: Word) => {
     setModalWord(word)
 
     const {
@@ -101,6 +109,11 @@ const Home = () => {
     setIsEditing(!isEditing)
   }
 
+  const handleDelete = async (id: number) => {
+    await deleteWord(id)
+    handleModalClose()
+  }
+
   return (
     <Main>
       <div className={styles.headingBox}>
@@ -125,7 +138,10 @@ const Home = () => {
                 <div className={styles.input}>
                   <InputText onChange={handleChange} newWord={newWord} />
                 </div>
-                <ExecuteButton>追加</ExecuteButton>
+
+                <div className={styles.addButton}>
+                  <ExecuteButton>追加</ExecuteButton>
+                </div>
               </form>
             </Modal>
           </div>
@@ -147,13 +163,28 @@ const Home = () => {
         </List>
 
         {modalWord && (
-          <Modal
-            title={modalWord.word}
-            onClose={handleModalClose}
-            isOpen={selectedModal === 'modal-definition'}
-          >
-            <DefinitionList word={modalWord} />
-          </Modal>
+          <>
+            <Modal
+              title={modalWord.word}
+              onClose={handleModalClose}
+              isOpen={selectedModal === 'modal-definition'}
+            >
+              <DefinitionList word={modalWord} />
+            </Modal>
+
+            <Modal
+              title='単語を削除する'
+              onClose={handleModalClose}
+              isOpen={selectedModal === 'modal-delete'}
+            >
+              <p className={styles.deleteMessage}>{modalWord.word}を削除してよろしいですか？</p>
+              <div className={styles.deleteButton}>
+                <ExecuteButton color='warning' onClick={() => handleDelete(modalWord.id)}>
+                  削除
+                </ExecuteButton>
+              </div>
+            </Modal>
+          </>
         )}
 
         <div className={styles.buttonBox}>
