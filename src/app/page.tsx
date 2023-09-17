@@ -41,6 +41,16 @@ const Home = () => {
     fetchWords()
   }, [])
 
+  async function createWord(newWord: Word) {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/words`, newWord)
+
+      setWords((words) => [...words, data])
+    } catch {
+      alert('There was an error loading')
+    }
+  }
+
   const handleModalOpen = (event: MouseEvent<HTMLButtonElement>, word: Word) => {
     event.preventDefault()
 
@@ -62,25 +72,8 @@ const Home = () => {
     setSelectedModal('')
   }
 
-  async function createWord(newWord: Word) {
-    try {
-      const res = await fetch(`${BASE_URL}/words`, {
-        method: 'POST',
-        body: JSON.stringify(newWord),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-
-      const data = await res.json()
-
-      setWords((words) => [...words, data])
-    } catch {
-      alert('There was an error loading')
-    }
-  }
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setBodyFixed(false)
     setNewWord(event.target.value)
   }
 
