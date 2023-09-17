@@ -11,6 +11,7 @@ import ListItem from './components/ListItem/ListItem'
 import Main from './components/Main/Main'
 import MainInner from './components/MainInner/MainInner'
 import Modal from './components/Modal/Modal'
+import useBodyFixed from './hooks/useBodyFixed'
 import styles from './page.module.scss'
 
 const Home = () => {
@@ -18,6 +19,8 @@ const Home = () => {
   const [words, setWords] = useState<Word[]>([])
   const [newWord, setNewWord] = useState<string>('')
   const [isEditing, setIsEditing] = useState<boolean>(false)
+
+  const { setBodyFixed } = useBodyFixed()
 
   const BASE_URL = 'http://localhost:8000'
 
@@ -44,10 +47,16 @@ const Home = () => {
         dataset: { modal },
       },
     } = event
-    if (modal) setSelectedModal(modal)
+    if (modal) {
+      setBodyFixed(true)
+      setSelectedModal(modal)
+    }
   }
 
-  const handleModalClose = () => setSelectedModal('')
+  const handleModalClose = () => {
+    setBodyFixed(false)
+    setSelectedModal('')
+  }
 
   async function createWord(newWord) {
     try {
