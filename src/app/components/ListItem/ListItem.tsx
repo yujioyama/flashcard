@@ -9,9 +9,10 @@ type Props = {
   onClose: () => void
   selectedModal: string
   isEditing: boolean
+  onModalOpen: () => void
 }
 
-const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEditing }) => {
+const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEditing, onModalOpen }) => {
   const { word: wordSpelling, meanings } = word
 
   return (
@@ -25,31 +26,14 @@ const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEditing }) 
           </div>
         </div>
       ) : (
-        <button className={styles.button} data-modal={wordSpelling}>
+        <button
+          className={styles.button}
+          data-modal='modal-definition'
+          onClick={(event) => onModalOpen(event, word)}
+        >
           {wordSpelling}
         </button>
       )}
-
-      <Modal title={wordSpelling} onClose={onClose} isOpen={selectedModal === wordSpelling}>
-        <ul className={styles.listLarge}>
-          {meanings.map((meaning, index) => {
-            const { partOfSpeech, definitions } = meaning
-            return (
-              <li
-                className={styles.itemLarge}
-                key={`${wordSpelling}_item_in_modal_${String(index)}`}
-              >
-                <div className={styles.heading}>
-                  <span className={styles.headingText}>品詞</span>
-                  <span className={styles.partOfSpeech}>{partOfSpeech}</span>
-                </div>
-
-                <DefinitionList definitions={definitions} index={index} />
-              </li>
-            )
-          })}
-        </ul>
-      </Modal>
     </li>
   )
 }

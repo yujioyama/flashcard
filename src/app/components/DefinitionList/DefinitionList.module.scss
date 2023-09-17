@@ -1,5 +1,28 @@
 @use '../../styles/variables';
 
+.heading {
+  display: flex;
+  justify-content: center;
+}
+
+.headingText {
+  font-size: 18px;
+  font-weight: variables.$font-bold;
+}
+
+.partOfSpeech {
+  margin-left: 15px;
+  font-size: 18px;
+}
+
+.itemLarge {
+  margin-top: 45px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 .list {
   margin-top: 30px;
 }

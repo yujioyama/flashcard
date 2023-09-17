@@ -1,8 +1,8 @@
 'use client'
 import axios, { AxiosResponse } from 'axios'
-import clsx from 'clsx'
 import { useState, useEffect } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
+import DefinitionList from './components/DefinitionList/DefinitionList'
 import ExecuteButton from './components/ExecuteButton/ExecuteButton'
 import Heading from './components/Heading/Heading'
 import InputText from './components/InputText/InputText'
@@ -13,12 +13,14 @@ import MainInner from './components/MainInner/MainInner'
 import Modal from './components/Modal/Modal'
 import useBodyFixed from './hooks/useBodyFixed'
 import styles from './page.module.scss'
+import type { Word } from './types/word'
 
 const Home = () => {
   const [selectedModal, setSelectedModal] = useState<string>('')
   const [words, setWords] = useState<Word[]>([])
   const [newWord, setNewWord] = useState<string>('')
   const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [modalWord, setModalWord] = useState<Word>()
 
   const { setBodyFixed } = useBodyFixed()
 
@@ -39,8 +41,10 @@ const Home = () => {
     fetchWords()
   }, [])
 
-  const handleModalOpen = (event) => {
+  const handleModalOpen = (event, word) => {
     event.preventDefault()
+
+    setModalWord(word)
 
     const {
       target: {
@@ -136,7 +140,7 @@ const Home = () => {
       </div>
 
       <MainInner>
-        <List onModalOpen={handleModalOpen}>
+        <List>
           {words.map((word) => (
             <ListItem
               isEditing={isEditing}
@@ -148,6 +152,16 @@ const Home = () => {
             />
           ))}
         </List>
+
+        {modalWord && (
+          <Modal
+            title={modalWord.word}
+            onClose={handleModalClose}
+            isOpen={selectedModal === 'modal-definition'}
+          >
+            <DefinitionList word={modalWord} />
+          </Modal>
+        )}
 
         <div className={styles.buttonBox}>
           <a href='' className={styles.button}>
