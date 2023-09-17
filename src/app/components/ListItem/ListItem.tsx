@@ -35,7 +35,10 @@ const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEditing }) 
           {meanings.map((meaning, index) => {
             const { partOfSpeech, definitions } = meaning
             return (
-              <li className={styles.itemLarge} key={`${wordSpelling}_item`}>
+              <li
+                className={styles.itemLarge}
+                key={`${wordSpelling}_item_in_modal_${String(index)}`}
+              >
                 <div className={styles.heading}>
                   <span className={styles.headingText}>品詞</span>
                   <span className={styles.partOfSpeech}>{partOfSpeech}</span>
