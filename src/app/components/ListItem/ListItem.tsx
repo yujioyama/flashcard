@@ -1,7 +1,6 @@
 import clsx from 'clsx'
+import { MouseEvent } from 'react'
 import type { Word } from '../../types/word'
-import DefinitionList from '../DefinitionList/DefinitionList'
-import Modal from '../Modal/Modal'
 import styles from './ListItem.module.scss'
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
   onClose: () => void
   selectedModal: string
   isEditing: boolean
-  onModalOpen: () => void
+  onModalOpen: (event: MouseEvent<HTMLButtonElement>, word: Word) => void
 }
 
 const ListItem: React.FC<Props> = ({ word, onClose, selectedModal, isEditing, onModalOpen }) => {

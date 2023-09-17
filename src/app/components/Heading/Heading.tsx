@@ -1,12 +1,14 @@
 import { ReactNode } from 'react'
+
 import styles from './Heading.module.scss'
 
 type Props = {
-  className: 'h2'
+  className?: 'h2'
   children: ReactNode
+  as?: 'h2'
 }
 
-const Heading: Props = ({ as: Component = 'h2', className = 'h2', children }) => {
+const Heading: React.FC<Props> = ({ as: Component = 'h2', className = 'h2', children }) => {
   return <Component className={styles[className]}>{children}</Component>
 }
 

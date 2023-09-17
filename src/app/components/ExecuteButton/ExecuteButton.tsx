@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { ReactNode } from 'react'
 import styles from './ExecuteButton.module.scss'
 
 type Props = {
@@ -6,7 +7,7 @@ type Props = {
   color?: 'warning'
 }
 
-const ExecuteButton = ({ children, color }) => {
+const ExecuteButton: React.FC<Props> = ({ children, color }) => {
   return (
     <button className={clsx(styles.button, color === 'warning' && styles.isWarning)}>
       {children}

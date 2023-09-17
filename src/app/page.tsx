@@ -1,6 +1,6 @@
 'use client'
 import axios, { AxiosResponse } from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, MouseEvent, FormEvent, ChangeEvent } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
 import DefinitionList from './components/DefinitionList/DefinitionList'
 import ExecuteButton from './components/ExecuteButton/ExecuteButton'
@@ -41,13 +41,13 @@ const Home = () => {
     fetchWords()
   }, [])
 
-  const handleModalOpen = (event, word) => {
+  const handleModalOpen = (event: MouseEvent<HTMLButtonElement>, word: Word) => {
     event.preventDefault()
 
     setModalWord(word)
 
     const {
-      target: {
+      currentTarget: {
         dataset: { modal },
       },
     } = event
@@ -62,7 +62,7 @@ const Home = () => {
     setSelectedModal('')
   }
 
-  async function createWord(newWord) {
+  async function createWord(newWord: Word) {
     try {
       const res = await fetch(`${BASE_URL}/words`, {
         method: 'POST',
@@ -80,11 +80,11 @@ const Home = () => {
     }
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewWord(event.target.value)
   }
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const response: AxiosResponse<Word[]> = await axios.get(
@@ -103,7 +103,7 @@ const Home = () => {
     setSelectedModal('')
   }
 
-  const handleSwitchEdit = (event) => {
+  const handleSwitchEdit = (event: MouseEvent) => {
     event.preventDefault()
     setIsEditing(!isEditing)
   }
@@ -115,7 +115,7 @@ const Home = () => {
 
         <div className={styles.actionBox}>
           <div className={styles.actionBoxButton}>
-            <ActionButton type='isEdit' onSwitchEdit={handleSwitchEdit} isEditing={isEditing}>
+            <ActionButton type='isEdit' onClick={handleSwitchEdit} isEditing={isEditing}>
               編集
             </ActionButton>
           </div>
