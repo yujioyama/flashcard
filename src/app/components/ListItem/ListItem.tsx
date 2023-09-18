@@ -12,7 +12,7 @@ type Props = {
 }
 
 const ListItem: React.FC<Props> = ({ word, isEditing, onModalOpen }) => {
-  const { word: wordSpelling, id } = word
+  const { word: wordSpelling } = word
 
   return (
     <li className={styles.item}>
@@ -20,7 +20,13 @@ const ListItem: React.FC<Props> = ({ word, isEditing, onModalOpen }) => {
         <div className={clsx(styles.button, styles.isEdit)}>
           {wordSpelling}
           <div className={styles.actionBox}>
-            <button className={clsx(styles.iconButton, styles.isEdit)}>編集</button>
+            <button
+              className={clsx(styles.iconButton, styles.isEdit)}
+              onClick={(event) => onModalOpen(event, word)}
+              data-modal='modal-edit'
+            >
+              編集
+            </button>
             <button
               className={clsx(styles.iconButton, styles.isDelete)}
               onClick={(event) => onModalOpen(event, word)}

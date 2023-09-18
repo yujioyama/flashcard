@@ -61,6 +61,30 @@ const Home = () => {
     }
   }
 
+  async function updateWord(id: number) {
+    try {
+      const response: AxiosResponse<Word[]> = await axios.get(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
+      )
+
+      const [updatingWord] = response.data
+
+      await axios.put(`${BASE_URL}/${id}`, updatingWord)
+
+      setWords((words) => {
+        return words.map((savedWord) => {
+          if (savedWord.id === id) {
+            return updatingWord
+          } else {
+            return savedWord
+          }
+        })
+      })
+    } catch {
+      alert('There was an error updating the word')
+    }
+  }
+
   const handleModalOpen = (event: MouseEvent<HTMLButtonElement>, word: Word) => {
     setModalWord(word)
 
@@ -114,6 +138,15 @@ const Home = () => {
     handleModalClose()
   }
 
+  const handleUpdate = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    modalWord && (await updateWord(modalWord.id))
+
+    setNewWord('')
+    handleModalClose()
+  }
+
   return (
     <Main>
       <div className={styles.headingBox}>
@@ -155,7 +188,7 @@ const Home = () => {
               isEditing={isEditing}
               onModalOpen={handleModalOpen}
               word={word}
-              key={word.id}
+              key={String(word.id)}
               onClose={handleModalClose}
               selectedModal={selectedModal}
             />
@@ -170,6 +203,22 @@ const Home = () => {
               isOpen={selectedModal === 'modal-definition'}
             >
               <DefinitionList word={modalWord} />
+            </Modal>
+
+            <Modal
+              title='単語を変更する'
+              onClose={handleModalClose}
+              isOpen={selectedModal === 'modal-edit'}
+            >
+              <form className={styles.row} onSubmit={handleUpdate}>
+                <div className={styles.input}>
+                  <InputText onChange={handleChange} newWord={newWord} />
+                </div>
+
+                <div className={styles.addButton}>
+                  <ExecuteButton>変更</ExecuteButton>
+                </div>
+              </form>
             </Modal>
 
             <Modal
