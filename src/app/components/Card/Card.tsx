@@ -1,15 +1,23 @@
 'use client'
 import clsx from 'clsx'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import type { Word } from '../../types/word'
+import DefinitionList from '../DefinitionList/DefinitionList'
 import styles from './Card.module.scss'
 
 type Props = {
-  text: string
+  word: Word
+  isActive: boolean
 }
 
-const Card: React.FC<Props> = ({ text }) => {
+const Card: React.FC<Props> = ({ word, isActive }) => {
+  const { word: wordSpelling } = word
+
   const [isFlipped, setIsFlipped] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!isActive) setIsFlipped(false)
+  }, [isActive])
 
   const handlePronunciation = (pronunciation: string) => {
     const audio = new Audio(pronunciation)
@@ -28,27 +36,11 @@ const Card: React.FC<Props> = ({ text }) => {
   return (
     <div className={styles.card} onClick={handleFlip}>
       <div className={clsx(styles.cardInner, styles.front, isFlipped && styles.isFlipped)}>
-        <p className={styles.frontText}>{text}</p>
+        <p className={styles.frontText}>{wordSpelling}</p>
       </div>
 
       <div className={clsx(styles.cardInner, styles.back, isFlipped && styles.isFlipped)}>
-        裏
-        {/* {meanings &&
-          meanings.map((meaning, index) => (
-            <div key={`${meaning.definitions[0].definition}_meanings_${String(index)}`}>
-              <p key={meaning.partOfSpeech}>{meaning.partOfSpeech}</p>
-              {meaning.definitions.map((definition, index) => {
-                const { definition: definitionDesc, example } = definition
-
-                return (
-                  <div key={`${definitionDesc}_definition_${String(index)}`}>
-                    <p>意味：{definitionDesc}</p>
-                    {example && <p key={example}>例文：{example}</p>}
-                  </div>
-                )
-              })}
-            </div>
-          ))} */}
+        <DefinitionList word={word} />
       </div>
     </div>
   )

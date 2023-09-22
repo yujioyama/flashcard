@@ -1,5 +1,6 @@
 'use client'
 import axios, { AxiosResponse } from 'axios'
+import Link from 'next/link'
 import { useState, useEffect, MouseEvent, FormEvent, ChangeEvent } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
 import DefinitionList from './components/DefinitionList/DefinitionList'
@@ -11,39 +12,24 @@ import ListItem from './components/ListItem/ListItem'
 import Main from './components/Main/Main'
 import MainInner from './components/MainInner/MainInner'
 import Modal from './components/Modal/Modal'
+import { SERVER_BASE_URL } from './config'
 import { useBodyFixed } from './hooks/useBodyFixed'
+import { useFetchWords } from './hooks/useFetchWords'
 import styles from './page.module.scss'
 import type { Word } from './types/word'
 
 const Home = () => {
   const [selectedModal, setSelectedModal] = useState<string>('')
-  const [words, setWords] = useState<Word[]>([])
   const [newWord, setNewWord] = useState<string>('')
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [modalWord, setModalWord] = useState<Word>()
 
+  const { words, setWords } = useFetchWords()
   const { setBodyFixed } = useBodyFixed()
-
-  const BASE_URL = 'http://localhost:8000/words'
-
-  useEffect(() => {
-    async function fetchWords() {
-      try {
-        const res = await fetch(`${BASE_URL}`)
-
-        const data = await res.json()
-
-        setWords(data)
-      } catch {
-        alert('There was an error loading')
-      }
-    }
-    fetchWords()
-  }, [])
 
   async function createWord(newWord: Word) {
     try {
-      const { data } = await axios.post(`${BASE_URL}`, newWord)
+      const { data } = await axios.post(`${SERVER_BASE_URL}`, newWord)
 
       setWords((words) => [...words, data])
     } catch {
@@ -53,7 +39,7 @@ const Home = () => {
 
   async function deleteWord(id: number) {
     try {
-      await axios.delete(`${BASE_URL}/${id}`)
+      await axios.delete(`${SERVER_BASE_URL}/${id}`)
 
       setWords((words) => words.filter((word) => word.id !== id))
     } catch {
@@ -69,7 +55,7 @@ const Home = () => {
 
       const [updatingWord] = response.data
 
-      await axios.put(`${BASE_URL}/${id}`, updatingWord)
+      await axios.put(`${SERVER_BASE_URL}/${id}`, updatingWord)
 
       setWords((words) => {
         return words.map((savedWord) => {
@@ -237,9 +223,9 @@ const Home = () => {
         )}
 
         <div className={styles.buttonBox}>
-          <a href='' className={styles.button}>
+          <Link href='/test' className={styles.button}>
             テストを開始する
-          </a>
+          </Link>
         </div>
       </MainInner>
     </Main>

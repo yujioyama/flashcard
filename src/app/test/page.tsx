@@ -1,9 +1,11 @@
 'use client'
 import clsx from 'clsx'
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide, useSwiper, useSwiperSlide } from 'swiper/react'
 import Card from '../components/Card/Card'
 import Main from '../components/Main/Main'
-import MainInner from '../components/MainInner/MainInner'
+import { useFetchWords } from '../hooks/useFetchWords'
+import { shuffleArray } from '../utilities/shuffleArray'
 import styles from './page.module.scss'
 import 'swiper/css'
 
@@ -21,39 +23,37 @@ function SlidePrevButton() {
   const swiper = useSwiper()
 
   return (
-    <button onClick={() => swiper.slidePrev()} className={clsx(styles.button, styles.isPrev)}>
+    <button
+      onClick={() => swiper.slidePrev()}
+      className={clsx(styles.button, styles.isPrev, swiper.activeIndex !== 0 && styles.isActive)}
+    >
       前へ
     </button>
   )
 }
 
 const Test = () => {
-  const swiperSlide = useSwiperSlide()
-  console.log(swiperSlide)
+  const { words, setWords } = useFetchWords()
+
+  const maxSlideNumber = words.length
 
   return (
     <Main>
-      <Swiper spaceBetween={50} centeredSlides slidesPerView={3} className={styles.swiper}>
+      <Swiper spaceBetween={100} centeredSlides slidesPerView={1.5} className={styles.swiper}>
         <SlidePrevButton />
-        <SwiperSlide className={styles.slide}>
-          <Card text='1' />
-        </SwiperSlide>
-        <SwiperSlide className={styles.slide}>
-          <Card text='1' />
-        </SwiperSlide>
-        <SwiperSlide className={styles.slide}>
-          <Card text='1' />
-        </SwiperSlide>
-        {/* {['1', '2', '3', '4', '5', '6'].map((num) => {
+        <SlideNextButton />
+
+        {shuffleArray(words).map((word) => {
           return (
-            <SwiperSlide
-              className={clsx(styles.slide, swiperSlide.isActive && styles.isActive)}
-              key={num}
-            >
-              <Card text='1' />
+            <SwiperSlide key={word.id}>
+              {({ isActive }) => (
+                <div className={clsx(styles.slideInner, isActive && styles.isActive)}>
+                  <Card word={word} isActive={isActive} />
+                </div>
+              )}
             </SwiperSlide>
           )
-        })} */}
+        })}
       </Swiper>
     </Main>
   )

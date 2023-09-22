@@ -32,11 +32,7 @@
           "definitions": [
             {
               "definition": "Being the only one of its kind; unequaled, unparalleled or unmatched.",
-              "synonyms": [
-                "one of a kind",
-                "singular",
-                "sui generis"
-              ],
+              "synonyms": ["one of a kind", "singular", "sui generis"],
               "antonyms": [],
               "example": "Every person has a unique life, therefore every person has a unique journey. ― Gary Cook"
             },
@@ -56,11 +52,7 @@
               "antonyms": []
             }
           ],
-          "synonyms": [
-            "one of a kind",
-            "singular",
-            "sui generis"
-          ],
+          "synonyms": ["one of a kind", "singular", "sui generis"],
           "antonyms": []
         }
       ],
@@ -68,9 +60,7 @@
         "name": "CC BY-SA 3.0",
         "url": "https://creativecommons.org/licenses/by-sa/3.0"
       },
-      "sourceUrls": [
-        "https://en.wiktionary.org/wiki/unique"
-      ],
+      "sourceUrls": ["https://en.wiktionary.org/wiki/unique"],
       "id": 5
     },
     {
@@ -176,9 +166,7 @@
         "name": "CC BY-SA 3.0",
         "url": "https://creativecommons.org/licenses/by-sa/3.0"
       },
-      "sourceUrls": [
-        "https://en.wiktionary.org/wiki/apple"
-      ],
+      "sourceUrls": ["https://en.wiktionary.org/wiki/apple"],
       "id": 6
     },
     {
@@ -265,9 +253,7 @@
               "antonyms": []
             }
           ],
-          "synonyms": [
-            "tod"
-          ],
+          "synonyms": ["tod"],
           "antonyms": []
         },
         {
@@ -324,9 +310,7 @@
         "name": "CC BY-SA 3.0",
         "url": "https://creativecommons.org/licenses/by-sa/3.0"
       },
-      "sourceUrls": [
-        "https://en.wiktionary.org/wiki/fox"
-      ],
+      "sourceUrls": ["https://en.wiktionary.org/wiki/fox"],
       "id": 7
     },
     {
@@ -362,9 +346,7 @@
             }
           ],
           "synonyms": [],
-          "antonyms": [
-            "mediocre"
-          ]
+          "antonyms": ["mediocre"]
         },
         {
           "partOfSpeech": "adjective",
@@ -465,15 +447,8 @@
               "example": "Great Scott!"
             }
           ],
-          "synonyms": [
-            "gr8",
-            "grt"
-          ],
-          "antonyms": [
-            "mediocre",
-            "ordinary",
-            "tiny"
-          ]
+          "synonyms": ["gr8", "grt"],
+          "antonyms": ["mediocre", "ordinary", "tiny"]
         },
         {
           "partOfSpeech": "adverb",
@@ -512,9 +487,7 @@
         "name": "CC BY-SA 3.0",
         "url": "https://creativecommons.org/licenses/by-sa/3.0"
       },
-      "sourceUrls": [
-        "https://en.wiktionary.org/wiki/great"
-      ],
+      "sourceUrls": ["https://en.wiktionary.org/wiki/great"],
       "id": 8
     },
     {
@@ -537,9 +510,7 @@
           "definitions": [
             {
               "definition": "To occur or take place.",
-              "synonyms": [
-                "come to pass"
-              ],
+              "synonyms": ["come to pass"],
               "antonyms": [],
               "example": "Let me tell you how it happened."
             },
@@ -560,9 +531,7 @@
               "antonyms": []
             }
           ],
-          "synonyms": [
-            "come to pass"
-          ],
+          "synonyms": ["come to pass"],
           "antonyms": []
         },
         {
@@ -582,9 +551,7 @@
         "name": "CC BY-SA 3.0",
         "url": "https://creativecommons.org/licenses/by-sa/3.0"
       },
-      "sourceUrls": [
-        "https://en.wiktionary.org/wiki/happen"
-      ],
+      "sourceUrls": ["https://en.wiktionary.org/wiki/happen"],
       "id": 9
     }
   ]
