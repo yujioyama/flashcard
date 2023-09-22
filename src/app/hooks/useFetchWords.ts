@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import { SERVER_BASE_URL } from '../config'
 import type { Word } from '../types/word'
@@ -8,11 +9,11 @@ export const useFetchWords = () => {
   useEffect(() => {
     async function fetchWords() {
       try {
-        const res = await fetch(`${SERVER_BASE_URL}`)
+        const response: AxiosResponse<Word[]> = await axios.get(`${SERVER_BASE_URL}`)
 
-        const data = await res.json()
+        const words = response.data
 
-        setWords(data)
+        setWords(words)
       } catch {
         alert('There was an error fetching words')
       }

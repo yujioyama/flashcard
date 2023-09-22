@@ -19,16 +19,6 @@ const Card: React.FC<Props> = ({ word, isActive }) => {
     if (!isActive) setIsFlipped(false)
   }, [isActive])
 
-  const handlePronunciation = (pronunciation: string) => {
-    const audio = new Audio(pronunciation)
-    audio
-      .play()
-      .then(() => {
-        console.log('Audio started!')
-      })
-      .catch((error) => console.warn(error))
-  }
-
   const handleFlip = () => {
     setIsFlipped(!isFlipped)
   }
