@@ -28,21 +28,7 @@ const Card: React.FC<Props> = ({ text }) => {
   return (
     <div className={styles.card} onClick={handleFlip}>
       <div className={clsx(styles.cardInner, styles.front, isFlipped && styles.isFlipped)}>
-        <p>{text}</p>
-        {/* 
-        <p>{wordSpelling}</p>
-        {phonetics &&
-          phonetics.map(
-            (pronunciation, index) =>
-              pronunciation && (
-                <p
-                  onClick={() => handlePronunciation(pronunciation.audio)}
-                  key={`${pronunciation.audio}_${String(index)}`}
-                >
-                  発音
-                </p>
-              ),
-          )} */}
+        <p className={styles.frontText}>{text}</p>
       </div>
 
       <div className={clsx(styles.cardInner, styles.back, isFlipped && styles.isFlipped)}>

@@ -1,5 +1,6 @@
 'use client'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
+import clsx from 'clsx'
+import { Swiper, SwiperSlide, useSwiper, useSwiperSlide } from 'swiper/react'
 import Card from '../components/Card/Card'
 import Main from '../components/Main/Main'
 import MainInner from '../components/MainInner/MainInner'
@@ -9,32 +10,53 @@ import 'swiper/css'
 function SlideNextButton() {
   const swiper = useSwiper()
 
-  return <button onClick={() => swiper.slideNext()}>Slide to the next slide</button>
+  return (
+    <button onClick={() => swiper.slideNext()} className={clsx(styles.button, styles.isNext)}>
+      次へ
+    </button>
+  )
 }
 
-const Home = () => {
+function SlidePrevButton() {
   const swiper = useSwiper()
+
+  return (
+    <button onClick={() => swiper.slidePrev()} className={clsx(styles.button, styles.isPrev)}>
+      前へ
+    </button>
+  )
+}
+
+const Test = () => {
+  const swiperSlide = useSwiperSlide()
+  console.log(swiperSlide)
+
   return (
     <Main>
-      <MainInner>
-        <Swiper slidesPerView={1} className={styles.swiper}>
-          <SlideNextButton />
-          <SwiperSlide>
-            <Card text='1' />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card text='2' />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card text='3' />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card text='4' />
-          </SwiperSlide>
-        </Swiper>
-      </MainInner>
+      <Swiper spaceBetween={50} centeredSlides slidesPerView={3} className={styles.swiper}>
+        <SlidePrevButton />
+        <SwiperSlide className={styles.slide}>
+          <Card text='1' />
+        </SwiperSlide>
+        <SwiperSlide className={styles.slide}>
+          <Card text='1' />
+        </SwiperSlide>
+        <SwiperSlide className={styles.slide}>
+          <Card text='1' />
+        </SwiperSlide>
+        {/* {['1', '2', '3', '4', '5', '6'].map((num) => {
+          return (
+            <SwiperSlide
+              className={clsx(styles.slide, swiperSlide.isActive && styles.isActive)}
+              key={num}
+            >
+              <Card text='1' />
+            </SwiperSlide>
+          )
+        })} */}
+      </Swiper>
     </Main>
   )
 }
 
-export default Home
+export default Test
