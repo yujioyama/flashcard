@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import { SERVER_BASE_URL } from '../config'
