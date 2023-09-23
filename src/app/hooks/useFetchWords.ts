@@ -18,7 +18,10 @@ export const useFetchWords = () => {
         alert('There was an error fetching words')
       }
     }
-    fetchWords()
+
+    ;async () => {
+      await fetchWords()
+    }
   }, [])
 
   return { words, setWords }

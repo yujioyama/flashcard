@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ReactNode, MouseEvent } from 'react'
+import { ReactNode } from 'react'
 import styles from './ActionButton.module.scss'
 
 type Props = {

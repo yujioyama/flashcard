@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ReactNode, MouseEvent } from 'react'
+import { ReactNode } from 'react'
 import styles from './ExecuteButton.module.scss'
 
 type Props = {

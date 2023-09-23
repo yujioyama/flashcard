@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useState, useMemo } from 'react'
-import { Pagination, Navigation } from 'swiper/modules'
+import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Word } from '../../types/word'
 import Card from '../Card/Card'

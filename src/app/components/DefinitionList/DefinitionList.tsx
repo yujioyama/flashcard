@@ -1,5 +1,5 @@
 import styles from './DefinitionList.module.scss'
-import type { Word } from '@/app/types/word'
+import type { Word } from '@/types/word'
 
 type Props = {
   word: Word

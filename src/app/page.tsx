@@ -34,7 +34,7 @@ const Home = () => {
 
       setWords((words) => [...words, data])
     } catch {
-      alert('There was an error loading')
+      alert('There was an error posting the word')
     }
   }
 
