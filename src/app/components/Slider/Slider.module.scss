@@ -1,8 +1,6 @@
 @use '../../styles/variables';
 
 .swiper {
-  position: relative;
-  display: flex;
   padding: 100px 0 10px;
 }
 
@@ -23,14 +21,14 @@
   display: flex;
   gap: 30px;
   justify-content: center;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 .pronunciationButton {
   width: 115px;
   height: 80px;
   font-size: 0;
-  background-color: variables.$blue;
+  background-color: variables.$main-dark;
   background-image: url('/icons/white/audio.svg');
   background-repeat: no-repeat;
   background-position: center;

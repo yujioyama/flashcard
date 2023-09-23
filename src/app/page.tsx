@@ -1,8 +1,9 @@
 'use client'
 import axios, { AxiosResponse } from 'axios'
-import Link from 'next/link'
-import { useState, useEffect, MouseEvent, FormEvent, ChangeEvent } from 'react'
+import { useState, MouseEvent, FormEvent, ChangeEvent } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
+import Button from './components/Button/Button'
+import ButtonBox from './components/ButtonBox/ButtonBox'
 import DefinitionList from './components/DefinitionList/DefinitionList'
 import ExecuteButton from './components/ExecuteButton/ExecuteButton'
 import Heading from './components/Heading/Heading'
@@ -222,11 +223,9 @@ const Home = () => {
           </>
         )}
 
-        <div className={styles.buttonBox}>
-          <Link href='/test' className={styles.button}>
-            テストを開始する
-          </Link>
-        </div>
+        <ButtonBox>
+          <Button href='/test'>テストを開始する</Button>
+        </ButtonBox>
       </MainInner>
     </Main>
   )

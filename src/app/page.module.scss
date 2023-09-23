@@ -19,24 +19,6 @@
   }
 }
 
-.buttonBox {
-  display: flex;
-  justify-content: center;
-  margin-top: 60px;
-}
-
-.button {
-  display: block;
-  width: 400px;
-  padding: 25px 0;
-  font-size: 20px;
-  font-weight: variables.$font-bold;
-  color: variables.$white;
-  text-align: center;
-  background: variables.$blue;
-  border-radius: 10px;
-}
-
 .row {
   display: flex;
 }
