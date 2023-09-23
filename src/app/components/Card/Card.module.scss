@@ -32,8 +32,10 @@
 }
 
 .frontText {
+  display: block;
   font-size: 40px;
   font-weight: variables.$font-bold;
+  text-align: center;
 }
 
 .back {
@@ -41,5 +43,22 @@
 
   &.isFlipped {
     transform: rotateX(0deg);
+  }
+}
+
+.phoneticsList {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.phoneticsItem {
+  font-size: 20px;
+  color: #a0a0a0;
+  text-align: center;
+
+  &:not(:last-child)::after {
+    margin: 0 10px;
+    content: 'or';
   }
 }

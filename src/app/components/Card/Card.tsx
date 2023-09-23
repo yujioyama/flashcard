@@ -11,7 +11,7 @@ type Props = {
 }
 
 const Card: React.FC<Props> = ({ word, isActive }) => {
-  const { word: wordSpelling } = word
+  const { word: wordSpelling, phonetics } = word
 
   const [isFlipped, setIsFlipped] = useState<boolean>(false)
 
@@ -26,7 +26,16 @@ const Card: React.FC<Props> = ({ word, isActive }) => {
   return (
     <div className={styles.card} onClick={handleFlip}>
       <div className={clsx(styles.cardInner, styles.front, isFlipped && styles.isFlipped)}>
-        <p className={styles.frontText}>{wordSpelling}</p>
+        <div className={styles.cardInnerFront}>
+          <span className={styles.frontText}>{wordSpelling}</span>
+          <ul className={styles.phoneticsList}>
+            {phonetics.map((phonetic) => (
+              <li className={styles.phoneticsItem} key={phonetic.text}>
+                {phonetic.text}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className={clsx(styles.cardInner, styles.back, isFlipped && styles.isFlipped)}>
