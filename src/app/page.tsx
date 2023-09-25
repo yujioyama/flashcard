@@ -96,20 +96,34 @@ const Home = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const response: AxiosResponse<Word[]> = await axios.get(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
-    )
+    try {
+      const response: AxiosResponse<Word[]> = await axios.get(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
+      )
 
-    const [word] = response.data
+      const [word] = response.data
 
-    if (words.some((e) => e.word === word.word)) return
+      if (words.some((e) => e.word === word.word)) {
+        alert('この単語はすでに登録されています。')
+        setNewWord('')
+        return
+      }
 
-    await createWord(word)
+      await createWord(word)
 
-    setWords([...words, word])
+      setWords([...words, word])
 
-    setNewWord('')
-    setSelectedModal('')
+      setNewWord('')
+      setSelectedModal('')
+    } catch (error) {
+      if (error.response.status === 404) {
+        alert('この単語は見つかりませんでした。')
+        setNewWord('')
+        return
+      }
+
+      console.error(error)
+    }
   }
 
   const handleSwitchEdit = (event: MouseEvent) => {
