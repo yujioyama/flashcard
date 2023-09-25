@@ -13,7 +13,7 @@ export async function GET() {
 
     return NextResponse.json(words)
   } catch {
-    console.error('Failed to read words file')
+    console.error('単語データの読み込みに失敗しました。')
   }
 }
 
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response)
   } catch {
-    console.error('Failed to write words file')
+    console.error('単語データの書き込みに失敗しました。')
   }
 }
 
@@ -47,7 +47,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json(wordsAfterDeletion)
   } catch {
-    console.error('Failed to deleting a word from the file')
+    console.error('単語データの削除に失敗しました。')
   }
 }
 
@@ -75,6 +75,6 @@ export async function PATCH(request: NextRequest) {
 
     return NextResponse.json(wordsAfterUpdate)
   } catch {
-    console.error('Failed to updating a word from the file')
+    console.error('単語データの更新に失敗しました。')
   }
 }

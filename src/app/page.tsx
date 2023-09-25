@@ -34,7 +34,7 @@ const Home = () => {
 
       setWords((words) => [...words, createdWord])
     } catch {
-      alert('There was an error posting the word')
+      alert('単語を追加できませんでした。')
     }
   }
 
@@ -46,7 +46,7 @@ const Home = () => {
 
       setWords(wordsAfterDeletion)
     } catch {
-      alert('There was an error deleting')
+      alert('単語を消せませんでした。')
     }
   }
 
@@ -65,7 +65,7 @@ const Home = () => {
 
       setWords(wordsAfterUpdate)
     } catch {
-      alert('There was an error updating the word')
+      alert('単語を更新できませんでした。')
     }
   }
 
