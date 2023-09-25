@@ -1,6 +1,6 @@
+import { WORDS_API_PATH } from './../config'
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import { SERVER_BASE_URL } from '../config'
 import type { Word } from '../types/word'
 
 export const useFetchWords = () => {
@@ -9,7 +9,7 @@ export const useFetchWords = () => {
   useEffect(() => {
     async function fetchWords() {
       try {
-        const response: AxiosResponse<Word[]> = await axios.get(`${SERVER_BASE_URL}`)
+        const response: AxiosResponse<Word[]> = await axios.get(WORDS_API_PATH)
 
         const words = response.data
 
@@ -19,9 +19,7 @@ export const useFetchWords = () => {
       }
     }
 
-    ;async () => {
-      await fetchWords()
-    }
+    fetchWords()
   }, [])
 
   return { words, setWords }

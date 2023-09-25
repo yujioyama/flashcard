@@ -13,7 +13,7 @@ import ListItem from './components/ListItem/ListItem'
 import Main from './components/Main/Main'
 import MainInner from './components/MainInner/MainInner'
 import Modal from './components/Modal/Modal'
-import { SERVER_BASE_URL } from './config'
+import { WORDS_API_PATH } from './config'
 import { useBodyFixed } from './hooks/useBodyFixed'
 import { useFetchWords } from './hooks/useFetchWords'
 import styles from './page.module.scss'
@@ -30,9 +30,9 @@ const Home = () => {
 
   async function createWord(newWord: Word) {
     try {
-      const { data } = await axios.post(`${SERVER_BASE_URL}`, newWord)
+      const { data: createdWord }: AxiosResponse<Word> = await axios.post(WORDS_API_PATH, newWord)
 
-      setWords((words) => [...words, data])
+      setWords((words) => [...words, createdWord])
     } catch {
       alert('There was an error posting the word')
     }
@@ -40,9 +40,11 @@ const Home = () => {
 
   async function deleteWord(id: number) {
     try {
-      await axios.delete(`${SERVER_BASE_URL}/${id}`)
+      const { data: wordsAfterDeletion }: AxiosResponse<Word[]> = await axios.delete(
+        `${WORDS_API_PATH}?id=${String(id)}`,
+      )
 
-      setWords((words) => words.filter((word) => word.id !== id))
+      setWords(wordsAfterDeletion)
     } catch {
       alert('There was an error deleting')
     }
@@ -54,19 +56,14 @@ const Home = () => {
         `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
       )
 
-      const [updatingWord] = response.data
+      const [overwritingWord] = response.data
 
-      await axios.put(`${SERVER_BASE_URL}/${id}`, updatingWord)
-
-      setWords((words) => {
-        return words.map((savedWord) => {
-          if (savedWord.id === id) {
-            return updatingWord
-          } else {
-            return savedWord
-          }
-        })
+      const { data: wordsAfterUpdate }: AxiosResponse<Word[]> = await axios.patch(WORDS_API_PATH, {
+        overwritingWord,
+        id,
       })
+
+      setWords(wordsAfterUpdate)
     } catch {
       alert('There was an error updating the word')
     }
