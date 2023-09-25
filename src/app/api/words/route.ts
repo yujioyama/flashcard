@@ -3,7 +3,7 @@ import path from 'path'
 import { NextRequest, NextResponse } from 'next/server'
 import type { Word } from '@/types/word'
 
-const wordsFile = path.join(process.cwd(), '/data/words.json')
+const wordsFile = path.join(process.cwd(), '/tmp/data/words.json')
 
 const readWordsFile = async (): Promise<Word[]> => JSON.parse(await fs.readFile(wordsFile, 'utf8'))
 
