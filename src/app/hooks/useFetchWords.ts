@@ -1,7 +1,7 @@
-import { WORDS_API_PATH } from './../config'
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import type { Word } from '../types/word'
+import { WORDS_API_PATH } from './../config'
 
 export const useFetchWords = () => {
   const [words, setWords] = useState<Word[]>([])
@@ -19,6 +19,8 @@ export const useFetchWords = () => {
       }
     }
 
+    // awaitをつけた書き方がわからない。即時関数でも無理だった。
+    // eslint-disable-next-line
     fetchWords()
   }, [])
 
