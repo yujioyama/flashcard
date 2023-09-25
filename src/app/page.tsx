@@ -115,7 +115,8 @@ const Home = () => {
 
       setNewWord('')
       setSelectedModal('')
-    } catch (error) {
+    } catch (error: any) {
+      // eslint-disable-next-line
       if (error.response.status === 404) {
         alert('この単語は見つかりませんでした。')
         setNewWord('')
