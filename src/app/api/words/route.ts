@@ -28,7 +28,8 @@ export async function POST(request: NextRequest) {
     await fs.writeFile(wordsFile, JSON.stringify(wordsWithNewWordIncluded))
 
     return NextResponse.json(response)
-  } catch {
+  } catch (error) {
+    console.error(error)
     console.error('単語データの書き込みに失敗しました。')
   }
 }
