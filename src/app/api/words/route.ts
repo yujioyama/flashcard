@@ -1,33 +1,26 @@
-import { promises as fs } from 'fs'
-import path from 'path'
+import axios from 'axios'
 import { NextRequest, NextResponse } from 'next/server'
-import type { Word } from '@/types/word'
 
-const wordsFile = path.join(process.cwd(), '/tmp/data/words.json')
-
-const readWordsFile = async (): Promise<Word[]> => JSON.parse(await fs.readFile(wordsFile, 'utf8'))
+const wordsJson = 'http://xd711843.php.xdomain.jp/root'
 
 export async function GET() {
   try {
-    const words = await readWordsFile()
+    const { data: words } = await axios.get(wordsJson)
 
     return NextResponse.json(words)
-  } catch {
+  } catch (error) {
+    console.log(error)
     console.error('単語データの読み込みに失敗しました。')
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const words = await readWordsFile()
-
     const response = await request.json()
 
-    const wordsWithNewWordIncluded = [...words, response]
+    const { data: createdWord } = await axios.post(wordsJson, response)
 
-    await fs.writeFile(wordsFile, JSON.stringify(wordsWithNewWordIncluded))
-
-    return NextResponse.json(response)
+    return NextResponse.json(createdWord)
   } catch (error) {
     console.error(error)
     console.error('単語データの書き込みに失敗しました。')
@@ -37,44 +30,26 @@ export async function POST(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     // await request.json()がエラーになってしまうので、idをクエリパラメーターから取得
+    // next13の問題のよう
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
 
-    const words = await readWordsFile()
+    await axios.delete(`${wordsJson}/${id}`)
 
-    const wordsAfterDeletion = words.filter((word) => word.id !== Number(id))
-
-    await fs.writeFile(wordsFile, JSON.stringify(wordsAfterDeletion))
-
-    return NextResponse.json(wordsAfterDeletion)
+    // 何かreturnしないと500エラーになるため、とりあえずstatus:200を返す
+    return NextResponse.json({ status: 200 })
   } catch {
     console.error('単語データの削除に失敗しました。')
   }
 }
 
-export async function PATCH(request: NextRequest) {
+export async function PUT(request: NextRequest) {
   try {
-    const words = await readWordsFile()
+    const { id, overwritingWord } = await request.json()
 
-    const { overwritingWord, id } = await request.json()
+    await axios.put(`${wordsJson}/${id}`, overwritingWord)
 
-    const oldWord = words.find((word) => word.id === id)
-
-    const wordsAfterUpdate = words.map((word) => {
-      if (word.id === id) {
-        // 無理やりアサーションでWord型に指定
-        return {
-          id: oldWord?.id,
-          ...overwritingWord,
-        } as Word
-      } else {
-        return word
-      }
-    })
-
-    await fs.writeFile(wordsFile, JSON.stringify(wordsAfterUpdate))
-
-    return NextResponse.json(wordsAfterUpdate)
+    return NextResponse.json({ status: 200 })
   } catch {
     console.error('単語データの更新に失敗しました。')
   }

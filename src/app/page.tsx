@@ -40,9 +40,9 @@ const Home = () => {
 
   async function deleteWord(id: number) {
     try {
-      const { data: wordsAfterDeletion }: AxiosResponse<Word[]> = await axios.delete(
-        `${WORDS_API_PATH}?id=${String(id)}`,
-      )
+      await axios.delete(`${WORDS_API_PATH}?id=${String(id)}`)
+
+      const wordsAfterDeletion = words.filter((word) => word.id !== id)
 
       setWords(wordsAfterDeletion)
     } catch {
@@ -52,15 +52,30 @@ const Home = () => {
 
   async function updateWord(id: number) {
     try {
-      const response: AxiosResponse<Word[]> = await axios.get(
+      // 配列の場合はOmit<>の後に[]を記載
+      const response: AxiosResponse<Omit<Word, 'id'>[]> = await axios.get(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
       )
 
       const [overwritingWord] = response.data
 
-      const { data: wordsAfterUpdate }: AxiosResponse<Word[]> = await axios.patch(WORDS_API_PATH, {
+      console.log(response.data)
+
+      await axios.put(WORDS_API_PATH, {
         overwritingWord,
         id,
+      })
+
+      const wordsAfterUpdate = words.map((word) => {
+        if (word.id === id) {
+          // 無理やりアサーションでWord型に指定
+          return {
+            id,
+            ...overwritingWord,
+          }
+        } else {
+          return word
+        }
       })
 
       setWords(wordsAfterUpdate)
@@ -110,8 +125,6 @@ const Home = () => {
       }
 
       await createWord(word)
-
-      setWords([...words, word])
 
       setNewWord('')
       setSelectedModal('')
