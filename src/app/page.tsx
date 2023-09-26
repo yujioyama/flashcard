@@ -13,9 +13,8 @@ import ListItem from './components/ListItem/ListItem'
 import Main from './components/Main/Main'
 import MainInner from './components/MainInner/MainInner'
 import Modal from './components/Modal/Modal'
-import { WORDS_API_PATH } from './config'
+import { useWords } from './contexts/WordsContext'
 import { useBodyFixed } from './hooks/useBodyFixed'
-import { useFetchWords } from './hooks/useFetchWords'
 import styles from './page.module.scss'
 import type { Word } from './types/word'
 
@@ -25,64 +24,9 @@ const Home = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [modalWord, setModalWord] = useState<Word>()
 
-  const { words, setWords } = useFetchWords()
   const { setBodyFixed } = useBodyFixed()
 
-  async function createWord(newWord: Word) {
-    try {
-      const { data: createdWord }: AxiosResponse<Word> = await axios.post(WORDS_API_PATH, newWord)
-
-      setWords((words) => [...words, createdWord])
-    } catch {
-      alert('単語を追加できませんでした。')
-    }
-  }
-
-  async function deleteWord(id: number) {
-    try {
-      await axios.delete(`${WORDS_API_PATH}?id=${String(id)}`)
-
-      const wordsAfterDeletion = words.filter((word) => word.id !== id)
-
-      setWords(wordsAfterDeletion)
-    } catch {
-      alert('単語を消せませんでした。')
-    }
-  }
-
-  async function updateWord(id: number) {
-    try {
-      // 配列の場合はOmit<>の後に[]を記載
-      const response: AxiosResponse<Omit<Word, 'id'>[]> = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
-      )
-
-      const [overwritingWord] = response.data
-
-      console.log(response.data)
-
-      await axios.put(WORDS_API_PATH, {
-        overwritingWord,
-        id,
-      })
-
-      const wordsAfterUpdate = words.map((word) => {
-        if (word.id === id) {
-          // 無理やりアサーションでWord型に指定
-          return {
-            id,
-            ...overwritingWord,
-          }
-        } else {
-          return word
-        }
-      })
-
-      setWords(wordsAfterUpdate)
-    } catch {
-      alert('単語を更新できませんでした。')
-    }
-  }
+  const { words, createWord, deleteWord, updateWord } = useWords()
 
   const handleModalOpen = (event: MouseEvent<HTMLButtonElement>, word: Word) => {
     setModalWord(word)
@@ -153,7 +97,7 @@ const Home = () => {
   const handleUpdate = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    modalWord && (await updateWord(modalWord.id))
+    modalWord && (await updateWord(modalWord.id, newWord))
 
     setNewWord('')
     handleModalClose()

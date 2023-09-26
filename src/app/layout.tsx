@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
 import Header from './components/Header/Header'
+import { WordsProvider } from './contexts/WordsContext'
 import styles from './layout.module.scss'
 
 const notojp = Noto_Sans_JP({ weight: ['400', '700'], subsets: ['latin'] })
@@ -15,11 +16,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='ja'>
-      <body className={clsx(notojp.className, styles.body)}>
-        <Header />
-        {children}
-      </body>
-    </html>
+    <WordsProvider>
+      <html lang='ja'>
+        <body className={clsx(notojp.className, styles.body)}>
+          <Header />
+          {children}
+        </body>
+      </html>
+    </WordsProvider>
   )
 }
