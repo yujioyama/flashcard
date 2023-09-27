@@ -1,25 +1,27 @@
-#README
+# README
 
-## useful shortcuts
+## 本アプリについて
 
-**rafc**
+本アプリは英単語を暗記することに特化した、暗記カードアプリです。<br/>
+覚えたい単語を追加すると、暗記カードの裏に自動で意味や例文などが記入されます。<br/>
+Next.js、Typescriptをメインに使用して作成しております。
 
-```
-import React from 'react'
+## 各画面の仕様
 
-export const $1 = () => {
-  return <div>$0</div>
-}
-```
+### トップページ
+![トップページ](https://github.com/yujioyama/flashcard/assets/43977868/c131914f-8cd2-4856-8de8-3e88d1eacd59)
 
-**rafce**
 
-```
-import React from 'react'
+### トップページ 編集モード
 
-const $1 = () => {
-  return <div>$0</div>
-}
 
-export default $1
-```
+![トップページ - 編集モード](https://github.com/yujioyama/flashcard/assets/43977868/8c13b8fc-703d-490d-b71d-c85c1769ec93)
+
+
+### テストページ
+
+
+**表示される単語はページをリロードするたびにシャッフルされてランダムな順番で表示されます。**
+
+
+![テストページ](https://github.com/yujioyama/flashcard/assets/43977868/55540b35-60f2-4533-9450-45d83d4be239)
