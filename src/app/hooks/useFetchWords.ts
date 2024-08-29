@@ -8,7 +8,7 @@ export const useFetchWords = () => {
   useEffect(() => {
     async function fetchWords() {
       try {
-        const { data: wordData, error: wordError } = await supabase.from('word').select(`
+        const { data: wordData } = await supabase.from('word').select(`
           *,
           phonetics (
             text,

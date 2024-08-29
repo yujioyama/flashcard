@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     for (const phonetic of response.phonetics) {
       try {
-        const { error } = await supabase
+        await supabase
           .from('phonetics')
           .insert({
             word_id: word.id,
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     for (const meanings of response.meanings) {
       try {
-        const { data: meaningsData, error } = await supabase
+        const { data: meaningsData } = await supabase
           .from('meanings')
           .insert({
             word_id: word.id,
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
         const meaning = meaningsData[0]
 
         for (const definition of meanings.definitions) {
-          const { error } = await supabase
+          await supabase
             .from('definitions')
             .insert({
               meaning_id: meaning.id,
@@ -95,7 +95,7 @@ export async function DELETE(request: NextRequest) {
 
     if (!id) throw new Error('there is no id')
 
-    const { error } = await supabase.from('word').delete().eq('id', id)
+    await supabase.from('word').delete().eq('id', id)
 
     return NextResponse.json({ status: 200 })
   } catch (error) {
