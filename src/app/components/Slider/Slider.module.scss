@@ -28,7 +28,7 @@
   width: 115px;
   height: 80px;
   font-size: 0;
-  background-color: variables.$main-dark;
+  background-color: variables.$main;
   background-image: url('/icons/white/audio.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -42,7 +42,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: variables.$main-dark;
+  background-color: variables.$main;
   transform: scale(0);
   transform-origin: left top;
 }

@@ -16,7 +16,7 @@ const Modal: React.FC<Props> = ({ children, isOpen, onClose, title }) => {
         <div className={styles.header}>
           <span className={styles.title}>{title}</span>
           <button className={styles.close} onClick={onClose}>
-            閉じる
+            close
           </button>
         </div>
         <div className={styles.body}>{children}</div>

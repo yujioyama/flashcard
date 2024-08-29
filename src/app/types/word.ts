@@ -1,21 +1,12 @@
-export type Word = {
-  word: string
-  phonetic: string
+import { Word, Definitions, Meanings, Phonetics } from './schema'
+
+export type WordType = Word & {
   phonetics: {
-    text: string
-    audio: string
+    text: Phonetics['text']
+    audio: Phonetics['audio']
   }[]
-  origin: string
   meanings: {
-    partOfSpeech: string
-    definitions: {
-      definition: string
-      example?: string
-      synonyms?: string[]
-      antonyms?: string[]
-    }[]
-    synonyms?: string[]
-    antonyms?: string[]
+    partOfSpeech: Meanings['partOfSpeech']
+    definitions: Omit<Definitions, 'id' | 'meaning_id'>[]
   }[]
-  id: number
 }

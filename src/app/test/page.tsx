@@ -13,7 +13,7 @@ const Test = () => {
       <Slider words={words} />
 
       <ButtonBox>
-        <Button href='/'>テストを終了する</Button>
+        <Button href='/'>finish the test</Button>
       </ButtonBox>
     </Main>
   )

@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { NextRequest, NextResponse } from 'next/server'
+import supabase from '@/lib/supabase'
+import type { WordType } from '@/types/word'
 
 const wordsJson = 'http://xd711843.php.xdomain.jp/root'
 
@@ -16,14 +18,71 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const response = await request.json()
+    const response = (await request.json()) as WordType
 
-    const { data: createdWord } = await axios.post(wordsJson, response)
+    const { data: wordData } = await supabase
+      .from('word')
+      .insert({
+        word: response.word,
+        phonetic: response.phonetic,
+        origin: response.origin,
+      })
+      .select()
 
-    return NextResponse.json(createdWord)
+    if (!wordData) return
+
+    const word = wordData[0]
+
+    for (const phonetic of response.phonetics) {
+      try {
+        const { error } = await supabase
+          .from('phonetics')
+          .insert({
+            word_id: word.id,
+            audio: phonetic.audio,
+            text: phonetic.text,
+          })
+          .select()
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    for (const meanings of response.meanings) {
+      try {
+        const { data: meaningsData, error } = await supabase
+          .from('meanings')
+          .insert({
+            word_id: word.id,
+            partOfSpeech: meanings.partOfSpeech,
+          })
+          .select()
+
+        if (!meaningsData) return
+
+        const meaning = meaningsData[0]
+
+        for (const definition of meanings.definitions) {
+          const { error } = await supabase
+            .from('definitions')
+            .insert({
+              meaning_id: meaning.id,
+              definition: definition.definition,
+              example: definition.example,
+              synonyms: definition.synonyms,
+              antonyms: definition.antonyms,
+            })
+            .select()
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    return NextResponse.json({ ...word, ...response.phonetics, ...response.meanings })
   } catch (error) {
     console.error(error)
-    console.error('単語データの書き込みに失敗しました。')
+    console.error('failed at adding the word in route')
   }
 }
 
@@ -34,23 +93,12 @@ export async function DELETE(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
 
-    await axios.delete(`${wordsJson}/${id}`)
+    if (!id) throw new Error('there is no id')
 
-    // 何かreturnしないと500エラーになるため、とりあえずstatus:200を返す
-    return NextResponse.json({ status: 200 })
-  } catch {
-    console.error('単語データの削除に失敗しました。')
-  }
-}
-
-export async function PUT(request: NextRequest) {
-  try {
-    const { id, overwritingWord } = await request.json()
-
-    await axios.put(`${wordsJson}/${id}`, overwritingWord)
+    const { error } = await supabase.from('word').delete().eq('id', id)
 
     return NextResponse.json({ status: 200 })
-  } catch {
-    console.error('単語データの更新に失敗しました。')
+  } catch (error) {
+    console.error(error)
   }
 }

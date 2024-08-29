@@ -1,6 +1,6 @@
 'use client'
 import axios, { AxiosResponse } from 'axios'
-import { useState, MouseEvent, FormEvent, ChangeEvent } from 'react'
+import { useState, MouseEvent, FormEvent, ChangeEvent, useRef } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
 import Button from './components/Button/Button'
 import ButtonBox from './components/ButtonBox/ButtonBox'
@@ -17,24 +17,30 @@ import { WORDS_API_PATH } from './config'
 import { useBodyFixed } from './hooks/useBodyFixed'
 import { useFetchWords } from './hooks/useFetchWords'
 import styles from './page.module.scss'
-import type { Word } from './types/word'
+import type { WordType } from '@/types/word'
 
 const Home = () => {
   const [selectedModal, setSelectedModal] = useState<string>('')
   const [newWord, setNewWord] = useState<string>('')
   const [isEditing, setIsEditing] = useState<boolean>(false)
-  const [modalWord, setModalWord] = useState<Word>()
+  const [modalWord, setModalWord] = useState<WordType>()
+  const submitProcessing = useRef(false)
 
   const { words, setWords } = useFetchWords()
   const { setBodyFixed } = useBodyFixed()
 
-  async function createWord(newWord: Word) {
+  async function createWord(newWord: WordType) {
     try {
-      const { data: createdWord }: AxiosResponse<Word> = await axios.post(WORDS_API_PATH, newWord)
+      const { data: createdWord }: AxiosResponse<WordType> = await axios.post(
+        WORDS_API_PATH,
+        newWord,
+      )
+
+      console.log(createdWord)
 
       setWords((words) => [...words, createdWord])
     } catch {
-      alert('単語を追加できませんでした。')
+      alert('failed at adding the word')
     }
   }
 
@@ -46,45 +52,11 @@ const Home = () => {
 
       setWords(wordsAfterDeletion)
     } catch {
-      alert('単語を消せませんでした。')
+      alert('could not delete the word')
     }
   }
 
-  async function updateWord(id: number) {
-    try {
-      // 配列の場合はOmit<>の後に[]を記載
-      const response: AxiosResponse<Omit<Word, 'id'>[]> = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
-      )
-
-      const [overwritingWord] = response.data
-
-      console.log(response.data)
-
-      await axios.put(WORDS_API_PATH, {
-        overwritingWord,
-        id,
-      })
-
-      const wordsAfterUpdate = words.map((word) => {
-        if (word.id === id) {
-          // 無理やりアサーションでWord型に指定
-          return {
-            id,
-            ...overwritingWord,
-          }
-        } else {
-          return word
-        }
-      })
-
-      setWords(wordsAfterUpdate)
-    } catch {
-      alert('単語を更新できませんでした。')
-    }
-  }
-
-  const handleModalOpen = (event: MouseEvent<HTMLButtonElement>, word: Word) => {
+  const handleModalOpen = (event: MouseEvent<HTMLButtonElement>, word: WordType) => {
     setModalWord(word)
 
     const {
@@ -111,15 +83,18 @@ const Home = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    if (submitProcessing.current) return
+    submitProcessing.current = true
+
     try {
-      const response: AxiosResponse<Word[]> = await axios.get(
+      const response: AxiosResponse<WordType[]> = await axios.get(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`,
       )
 
       const [word] = response.data
 
       if (words.some((e) => e.word === word.word)) {
-        alert('この単語はすでに登録されています。')
+        alert('this word is already registered')
         setNewWord('')
         return
       }
@@ -131,12 +106,14 @@ const Home = () => {
     } catch (error: any) {
       // eslint-disable-next-line
       if (error.response.status === 404) {
-        alert('この単語は見つかりませんでした。')
+        alert('could not find the word')
         setNewWord('')
         return
       }
 
       console.error(error)
+    } finally {
+      submitProcessing.current = false
     }
   }
 
@@ -150,19 +127,10 @@ const Home = () => {
     handleModalClose()
   }
 
-  const handleUpdate = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    modalWord && (await updateWord(modalWord.id))
-
-    setNewWord('')
-    handleModalClose()
-  }
-
   return (
     <Main>
       <div className={styles.headingBox}>
-        <Heading>単語リスト</Heading>
+        <Heading>Words</Heading>
 
         <div className={styles.actionBox}>
           <div className={styles.actionBoxButton}>
@@ -177,7 +145,7 @@ const Home = () => {
             <Modal
               isOpen={selectedModal === 'add'}
               onClose={handleModalClose}
-              title='新しく単語を追加する'
+              title='add a new word'
             >
               <form className={styles.row} onSubmit={handleSubmit}>
                 <div className={styles.input}>
@@ -185,7 +153,7 @@ const Home = () => {
                 </div>
 
                 <div className={styles.addButton}>
-                  <ExecuteButton>追加</ExecuteButton>
+                  <ExecuteButton>add</ExecuteButton>
                 </div>
               </form>
             </Modal>
@@ -218,30 +186,16 @@ const Home = () => {
             </Modal>
 
             <Modal
-              title='単語を変更する'
-              onClose={handleModalClose}
-              isOpen={selectedModal === 'modal-edit'}
-            >
-              <form className={styles.row} onSubmit={handleUpdate}>
-                <div className={styles.input}>
-                  <InputText onChange={handleChange} newWord={newWord} />
-                </div>
-
-                <div className={styles.addButton}>
-                  <ExecuteButton>変更</ExecuteButton>
-                </div>
-              </form>
-            </Modal>
-
-            <Modal
-              title='単語を削除する'
+              title='delete the word'
               onClose={handleModalClose}
               isOpen={selectedModal === 'modal-delete'}
             >
-              <p className={styles.deleteMessage}>{modalWord.word}を削除してよろしいですか？</p>
+              <p className={styles.deleteMessage}>
+                Are you sure you want to delete {modalWord.word}
+              </p>
               <div className={styles.deleteButton}>
                 <ExecuteButton color='warning' onClick={() => handleDelete(modalWord.id)}>
-                  削除
+                  delete
                 </ExecuteButton>
               </div>
             </Modal>
@@ -249,7 +203,7 @@ const Home = () => {
         )}
 
         <ButtonBox>
-          <Button href='/test'>テストを開始する</Button>
+          <Button href='/test'>start a test</Button>
         </ButtonBox>
       </MainInner>
     </Main>

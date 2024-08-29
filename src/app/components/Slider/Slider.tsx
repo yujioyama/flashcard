@@ -2,16 +2,16 @@ import clsx from 'clsx'
 import { useState, useMemo } from 'react'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import type { Word } from '../../types/word'
 import Card from '../Card/Card'
 import styles from './Slider.module.scss'
 import { SlideNextButton, SlidePrevButton } from './SliderButton/SliderButton'
+import type { WordType } from '@/types/word'
 import { shuffleArray } from '@/utilities/shuffleArray'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
 type Props = {
-  words: Word[]
+  words: WordType[]
 }
 
 const Slider: React.FC<Props> = ({ words }) => {
@@ -36,7 +36,7 @@ const Slider: React.FC<Props> = ({ words }) => {
 
   const pronunciations = shuffledWords[activeIndex]?.phonetics
     .map(({ audio }) => audio)
-    .filter((audio) => audio) // たまにpronunciationが空の時があるため
+    .filter((audio) => audio)
 
   return (
     <>
@@ -74,15 +74,19 @@ const Slider: React.FC<Props> = ({ words }) => {
 
       {pronunciations && (
         <div className={styles.buttonWrap}>
-          {pronunciations.map((pronunciation) => (
-            <button
-              onClick={() => handlePronunciation(pronunciation)}
-              key={pronunciation}
-              className={styles.pronunciationButton}
-            >
-              発音
-            </button>
-          ))}
+          {pronunciations.map((pronunciation) => {
+            if (!pronunciation) return
+
+            return (
+              <button
+                onClick={() => handlePronunciation(pronunciation)}
+                key={pronunciation}
+                className={styles.pronunciationButton}
+              >
+                発音
+              </button>
+            )
+          })}
         </div>
       )}
     </>

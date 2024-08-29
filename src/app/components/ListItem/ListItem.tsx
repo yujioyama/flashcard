@@ -1,14 +1,14 @@
 import clsx from 'clsx'
 import { MouseEvent } from 'react'
-import type { Word } from '../../types/word'
 import styles from './ListItem.module.scss'
+import type { WordType } from '@/types/word'
 
 type Props = {
-  word: Word
+  word: WordType
   onClose: () => void
   selectedModal: string
   isEditing: boolean
-  onModalOpen: (event: MouseEvent<HTMLButtonElement>, word: Word) => void
+  onModalOpen: (event: MouseEvent<HTMLButtonElement>, word: WordType) => void
 }
 
 const ListItem: React.FC<Props> = ({ word, isEditing, onModalOpen }) => {
@@ -21,18 +21,11 @@ const ListItem: React.FC<Props> = ({ word, isEditing, onModalOpen }) => {
           {wordSpelling}
           <div className={styles.actionBox}>
             <button
-              className={clsx(styles.iconButton, styles.isEdit)}
-              onClick={(event) => onModalOpen(event, word)}
-              data-modal='modal-edit'
-            >
-              編集
-            </button>
-            <button
               className={clsx(styles.iconButton, styles.isDelete)}
               onClick={(event) => onModalOpen(event, word)}
               data-modal='modal-delete'
             >
-              削除
+              delete
             </button>
           </div>
         </div>

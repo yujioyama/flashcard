@@ -1,4 +1,3 @@
-// Word[]以外の配列もシャッフルできるよう、型はジェネリクスを使用
 export const shuffleArray = <T>(array: T[]) => {
   const initialValue: T[] = []
   const cloneArray = [...array]

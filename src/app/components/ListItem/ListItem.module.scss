@@ -54,10 +54,6 @@
   background-position: center;
   background-size: 50px;
 
-  &.isEdit {
-    background-image: url('/icons/yellow/edit.svg');
-  }
-
   &.isDelete {
     background-image: url('/icons/red/delete.svg');
   }

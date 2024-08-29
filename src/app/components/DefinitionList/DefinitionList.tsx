@@ -1,8 +1,8 @@
 import styles from './DefinitionList.module.scss'
-import type { Word } from '@/types/word'
+import type { WordType } from '@/types/word'
 
 type Props = {
-  word: Word
+  word: WordType
 }
 
 const DefinitionList: React.FC<Props> = ({ word }) => {
@@ -13,7 +13,7 @@ const DefinitionList: React.FC<Props> = ({ word }) => {
         return (
           <li className={styles.itemLarge} key={`${word.word}_item_in_modal_${String(index)}`}>
             <div className={styles.heading}>
-              <span className={styles.headingText}>品詞</span>
+              <span className={styles.headingText}>part of speech</span>
               <span className={styles.partOfSpeech}>{partOfSpeech}</span>
             </div>
 
@@ -24,13 +24,13 @@ const DefinitionList: React.FC<Props> = ({ word }) => {
                 return (
                   <div className={styles.item} key={definitionDescription}>
                     <div className={styles.row}>
-                      <dt className={styles.title}>意味</dt>
+                      <dt className={styles.title}>meaning</dt>
                       <dd className={styles.definition}>{definitionDescription}</dd>
                     </div>
 
                     {example && (
                       <div className={styles.row}>
-                        <dt className={styles.title}>例文</dt>
+                        <dt className={styles.title}>example sentence</dt>
                         <dd className={styles.definition}>{example}</dd>
                       </div>
                     )}

@@ -1,12 +1,12 @@
 'use client'
 import clsx from 'clsx'
 import React, { useState, useEffect } from 'react'
-import type { Word } from '../../types/word'
+import type { WordType } from '../../types/word'
 import DefinitionList from '../DefinitionList/DefinitionList'
 import styles from './Card.module.scss'
 
 type Props = {
-  word: Word
+  word: WordType
   isActive: boolean
 }
 

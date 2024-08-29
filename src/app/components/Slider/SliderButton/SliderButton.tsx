@@ -29,7 +29,7 @@ export const SlideNextButton: React.FC<Props> = ({
         activeIndex + 1 === maxSlideNumber && styles.isHidden,
       )}
     >
-      次へ
+      next
     </button>
   )
 }
@@ -50,7 +50,7 @@ export const SlidePrevButton: React.FC<Omit<Props, 'maxSlideNumber'>> = ({
       onClick={handleSlidePrev}
       className={clsx(styles.button, styles.isPrev, activeIndex === 0 && styles.isHidden)}
     >
-      前へ
+      previous
     </button>
   )
 }

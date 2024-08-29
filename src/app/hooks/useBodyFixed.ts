@@ -7,7 +7,6 @@ export const useBodyFixed = () => {
   const isFirstRender = useRef(false)
 
   useEffect(() => {
-    // 初回レンダリング時は発火しないようにする
     if (!isFirstRender.current) {
       isFirstRender.current = true
       return
