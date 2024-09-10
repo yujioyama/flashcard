@@ -211,7 +211,7 @@ const Home = () => {
 
         {words.length > 0 ? (
           <ButtonBox>
-            <Button href='/test'>start a test</Button>
+            <Button href='/test'>start testing</Button>
           </ButtonBox>
         ) : (
           <p className={styles.noWordsText}>No words added yet.</p>

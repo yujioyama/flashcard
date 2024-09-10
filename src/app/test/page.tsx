@@ -13,7 +13,7 @@ const Test = () => {
       <Slider words={words} />
 
       <ButtonBox>
-        <Button href='/'>finish the test</Button>
+        <Button href='/'>finish testing</Button>
       </ButtonBox>
     </Main>
   )

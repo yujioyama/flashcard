@@ -1,12 +1,22 @@
 @use '../../styles/variables';
 
+.item {
+  position: relative;
+  width: calc(50% - 10px);
+  word-break: break-all;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 .button {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
   height: 80px;
-  padding: 0 10px 0 50px;
+  padding: 0 55px 0 50px;
   font-size: 20px;
   line-height: 1;
   background: variables.$white;
@@ -21,7 +31,15 @@
     height: 40px;
     content: '';
     background-image: url('/icons/black/arrow_right.svg');
+    transition-duration: 0.3s;
+    transition-property: right;
     transform: translateY(-50%);
+  }
+
+  &:hover {
+    &::before {
+      right: 10px;
+    }
   }
 
   &.isEdit {
@@ -34,33 +52,6 @@
   }
 }
 
-.item {
-  position: relative;
-  margin-top: 30px;
-
-  &:first-child {
-    margin-top: 0;
-  }
-}
-
-.actionBox {
-  display: flex;
-  height: 100%;
-}
-
-.iconButton {
-  width: 60px;
-  height: 100%;
-  font-size: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 50px;
-
-  &.isDelete {
-    background-image: url('/icons/red/delete.svg');
-  }
-}
-
 .checkbox {
   position: absolute;
   top: 50%;
@@ -68,6 +59,7 @@
   z-index: 1;
   width: 20px;
   height: 20px;
+  cursor: pointer;
   border: 2px solid variables.$main;
   border-radius: 5px;
   transform: translateY(-50%);
