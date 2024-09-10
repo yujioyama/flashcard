@@ -12,7 +12,6 @@ export async function GET() {
     return NextResponse.json(words)
   } catch (error) {
     console.log(error)
-    console.error('単語データの読み込みに失敗しました。')
   }
 }
 
@@ -79,7 +78,11 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ ...word, ...response.phonetics, ...response.meanings })
+    return NextResponse.json({
+      ...word,
+      phonetics: response.phonetics,
+      meanings: response.meanings,
+    })
   } catch (error) {
     console.error(error)
     console.error('failed at adding the word in route')

@@ -5,7 +5,7 @@ type Props = {
 }
 
 const MainInner: React.FC<Props> = ({ children }) => {
-  return <main className={styles.mainInner}>{children}</main>
+  return <div className={styles.mainInner}>{children}</div>
 }
 
 export default MainInner

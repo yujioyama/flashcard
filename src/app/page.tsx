@@ -6,7 +6,6 @@ import Button from './components/Button/Button'
 import ButtonBox from './components/ButtonBox/ButtonBox'
 import DefinitionList from './components/DefinitionList/DefinitionList'
 import ExecuteButton from './components/ExecuteButton/ExecuteButton'
-import Heading from './components/Heading/Heading'
 import InputText from './components/InputText/InputText'
 import List from './components/List/List'
 import ListItem from './components/ListItem/ListItem'
@@ -22,8 +21,9 @@ import type { WordType } from '@/types/word'
 const Home = () => {
   const [selectedModal, setSelectedModal] = useState<string>('')
   const [newWord, setNewWord] = useState<string>('')
-  const [isEditing, setIsEditing] = useState<boolean>(false)
   const [modalWord, setModalWord] = useState<WordType>()
+  const [selectedDeleteWordIds, setSelectedDeleteWordIds] = useState<number[]>([])
+  const [isDeleteButtonDisabled, setIsDeleteButtonDisabled] = useState<boolean>(true)
   const submitProcessing = useRef(false)
 
   const { words, setWords } = useFetchWords()
@@ -36,8 +36,6 @@ const Home = () => {
         newWord,
       )
 
-      console.log(createdWord)
-
       setWords((words) => [...words, createdWord])
     } catch {
       alert('failed at adding the word')
@@ -48,9 +46,8 @@ const Home = () => {
     try {
       await axios.delete(`${WORDS_API_PATH}?id=${String(id)}`)
 
-      const wordsAfterDeletion = words.filter((word) => word.id !== id)
-
-      setWords(wordsAfterDeletion)
+      setSelectedDeleteWordIds([])
+      setWords((prevWords) => prevWords.filter((word) => word.id !== id))
     } catch {
       alert('could not delete the word')
     }
@@ -84,6 +81,13 @@ const Home = () => {
     event.preventDefault()
 
     if (submitProcessing.current) return
+
+    if (words.some((e) => e.word === newWord)) {
+      alert('this word is already registered')
+      setNewWord('')
+      return
+    }
+
     submitProcessing.current = true
 
     try {
@@ -93,71 +97,75 @@ const Home = () => {
 
       const [word] = response.data
 
-      if (words.some((e) => e.word === word.word)) {
-        alert('this word is already registered')
-        setNewWord('')
-        return
-      }
-
       await createWord(word)
 
       setNewWord('')
       setSelectedModal('')
     } catch (error: any) {
+      if (error.code === 'ERR_NETWORK') {
+        alert(`Your internet connection is not stable.`)
+      }
       // eslint-disable-next-line
       if (error.response.status === 404) {
         alert('could not find the word')
-        setNewWord('')
         return
       }
-
-      console.error(error)
     } finally {
       submitProcessing.current = false
+      setNewWord('')
     }
   }
 
-  const handleSwitchEdit = (event: MouseEvent) => {
-    event.preventDefault()
-    setIsEditing(!isEditing)
+  const handleDelete = async () => {
+    for (const selectedDeleteWordId of selectedDeleteWordIds) {
+      await deleteWord(selectedDeleteWordId)
+    }
   }
 
-  const handleDelete = async (id: number) => {
-    await deleteWord(id)
-    handleModalClose()
+  const handleSelectDeleteWord = (id: number) => {
+    if (selectedDeleteWordIds.some((selectedDeleteWordId) => selectedDeleteWordId === id)) {
+      const newFilteredDeleteWordIds = selectedDeleteWordIds.filter(
+        (selectedDeleteWordId) => selectedDeleteWordId !== id,
+      )
+
+      setSelectedDeleteWordIds(newFilteredDeleteWordIds)
+
+      if (newFilteredDeleteWordIds.length === 0) {
+        setIsDeleteButtonDisabled(true)
+      }
+    } else {
+      const newSelectedDeleteWordIds = [...selectedDeleteWordIds, id]
+      setSelectedDeleteWordIds(newSelectedDeleteWordIds)
+
+      if (newSelectedDeleteWordIds.length > 0) {
+        setIsDeleteButtonDisabled(false)
+      }
+    }
   }
 
   return (
     <Main>
-      <div className={styles.headingBox}>
-        <Heading>Words</Heading>
+      <div className={styles.actionBox}>
+        <div className={styles.actionBoxButton}>
+          <ActionButton type='isAdd' onClick={handleModalOpen} dataModal='add'>
+            追加
+          </ActionButton>
+          <Modal isOpen={selectedModal === 'add'} onClose={handleModalClose} title='add a new word'>
+            <form className={styles.row} onSubmit={handleSubmit}>
+              <div className={styles.input}>
+                <InputText onChange={handleChange} newWord={newWord} />
+              </div>
 
-        <div className={styles.actionBox}>
-          <div className={styles.actionBoxButton}>
-            <ActionButton type='isEdit' onClick={handleSwitchEdit} isEditing={isEditing}>
-              編集
-            </ActionButton>
-          </div>
-          <div className={styles.actionBoxButton}>
-            <ActionButton type='isAdd' onClick={handleModalOpen} dataModal='add'>
-              追加
-            </ActionButton>
-            <Modal
-              isOpen={selectedModal === 'add'}
-              onClose={handleModalClose}
-              title='add a new word'
-            >
-              <form className={styles.row} onSubmit={handleSubmit}>
-                <div className={styles.input}>
-                  <InputText onChange={handleChange} newWord={newWord} />
-                </div>
-
-                <div className={styles.addButton}>
-                  <ExecuteButton>add</ExecuteButton>
-                </div>
-              </form>
-            </Modal>
-          </div>
+              <div className={styles.addButton}>
+                <ExecuteButton>add</ExecuteButton>
+              </div>
+            </form>
+          </Modal>
+        </div>
+        <div className={styles.actionBoxButton}>
+          <ActionButton type='isDelete' onClick={handleDelete} isDisabled={isDeleteButtonDisabled}>
+            削除
+          </ActionButton>
         </div>
       </div>
 
@@ -165,12 +173,11 @@ const Home = () => {
         <List>
           {words.map((word) => (
             <ListItem
-              isEditing={isEditing}
               onModalOpen={handleModalOpen}
               word={word}
               key={String(word.id)}
               onClose={handleModalClose}
-              selectedModal={selectedModal}
+              onSelectDeleteWord={handleSelectDeleteWord}
             />
           ))}
         </List>
@@ -185,7 +192,7 @@ const Home = () => {
               <DefinitionList word={modalWord} />
             </Modal>
 
-            <Modal
+            {/* <Modal
               title='delete the word'
               onClose={handleModalClose}
               isOpen={selectedModal === 'modal-delete'}
@@ -198,13 +205,17 @@ const Home = () => {
                   delete
                 </ExecuteButton>
               </div>
-            </Modal>
+            </Modal> */}
           </>
         )}
 
-        <ButtonBox>
-          <Button href='/test'>start a test</Button>
-        </ButtonBox>
+        {words.length > 0 ? (
+          <ButtonBox>
+            <Button href='/test'>start a test</Button>
+          </ButtonBox>
+        ) : (
+          <p className={styles.noWordsText}>No words added yet.</p>
+        )}
       </MainInner>
     </Main>
   )

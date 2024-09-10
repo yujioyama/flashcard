@@ -3,19 +3,20 @@ import { ReactNode } from 'react'
 import styles from './ActionButton.module.scss'
 
 type Props = {
-  type: 'isEdit' | 'isAdd'
-  isEditing?: boolean
+  type: 'isDelete' | 'isAdd'
   children: ReactNode
   dataModal?: string
   onClick: any // TODO: fix this later
+  isDisabled?: boolean
 }
 
-const ActionButton: React.FC<Props> = ({ type, children, dataModal, isEditing, onClick }) => {
+const ActionButton: React.FC<Props> = ({ type, children, dataModal, onClick, isDisabled }) => {
   return (
     <button
-      className={clsx(styles.actionButton, styles[type], isEditing && styles.isEditing)}
+      className={clsx(styles.actionButton, styles[type], isDisabled && styles.isDisabled)}
       onClick={onClick}
       data-modal={dataModal}
+      disabled={isDisabled}
     >
       {children}
     </button>

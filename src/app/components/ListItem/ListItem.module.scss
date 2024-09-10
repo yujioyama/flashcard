@@ -6,8 +6,9 @@
   align-items: center;
   width: 100%;
   height: 80px;
-  padding: 0 10px 0 30px;
+  padding: 0 10px 0 50px;
   font-size: 20px;
+  line-height: 1;
   background: variables.$white;
   border-radius: 10px;
   box-shadow: (0 4px 3px 2px rgba(variables.$black, 0.1));
@@ -34,6 +35,7 @@
 }
 
 .item {
+  position: relative;
   margin-top: 30px;
 
   &:first-child {
@@ -56,5 +58,23 @@
 
   &.isDelete {
     background-image: url('/icons/red/delete.svg');
+  }
+}
+
+.checkbox {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  border: 2px solid variables.$main;
+  border-radius: 5px;
+  transform: translateY(-50%);
+
+  &:checked {
+    background-image: url('/icons/main/check.svg');
+    background-position: center;
+    background-size: 14px;
   }
 }
