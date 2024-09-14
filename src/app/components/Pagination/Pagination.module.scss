@@ -1,0 +1,27 @@
+@use '../../styles/variables';
+
+.list {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.link {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  line-height: 1;
+  color: variables.$main;
+  border: 2px solid variables.$main;
+  border-radius: 8px;
+
+  &.isCurrent {
+    color: variables.$white;
+    background-color: variables.$main;
+  }
+}

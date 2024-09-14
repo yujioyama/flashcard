@@ -3,15 +3,41 @@ import { NextRequest, NextResponse } from 'next/server'
 import supabase from '@/lib/supabase'
 import type { WordType } from '@/types/word'
 
-const wordsJson = 'http://xd711843.php.xdomain.jp/root'
+export async function GET(request: NextRequest) {
+  const from = Number(request.nextUrl.searchParams.get('from'))
+  const to = Number(request.nextUrl.searchParams.get('to'))
 
-export async function GET() {
   try {
-    const { data: words } = await axios.get(wordsJson)
+    const { data: wordData, count } = await supabase
+      .from('word')
+      .select(
+        `
+      *,
+      phonetics (
+        text,
+        audio
+      ),
+      meanings (
+        partOfSpeech,
+        definitions (
+          definition,
+          example,
+          synonyms,
+          antonyms
+        )
+      )
+    `,
+        { count: 'exact' },
+      )
+      .range(from, to)
 
-    return NextResponse.json(words)
+    console.log(wordData)
+
+    if (wordData === null) return
+
+    return NextResponse.json({ wordData, count })
   } catch (error) {
-    console.log(error)
+    console.error('There was an error fetching words:', error)
   }
 }
 

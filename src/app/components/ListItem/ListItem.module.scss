@@ -3,6 +3,7 @@
 .item {
   position: relative;
   width: calc(50% - 10px);
+  height: 80px;
   word-break: break-all;
 
   &:first-child {

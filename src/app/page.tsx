@@ -1,6 +1,6 @@
 'use client'
 import axios, { AxiosResponse } from 'axios'
-import { useState, MouseEvent, FormEvent, ChangeEvent, useRef } from 'react'
+import { useEffect, useState, MouseEvent, FormEvent, ChangeEvent, useRef } from 'react'
 import ActionButton from './components/ActionButton/ActionButton'
 import Button from './components/Button/Button'
 import ButtonBox from './components/ButtonBox/ButtonBox'
@@ -12,31 +12,53 @@ import ListItem from './components/ListItem/ListItem'
 import Main from './components/Main/Main'
 import MainInner from './components/MainInner/MainInner'
 import Modal from './components/Modal/Modal'
+import Pagination from './components/Pagination/Pagination'
 import { WORDS_API_PATH } from './config'
 import { useBodyFixed } from './hooks/useBodyFixed'
-import { useFetchWords } from './hooks/useFetchWords'
 import styles from './page.module.scss'
 import type { WordType } from '@/types/word'
 
 const Home = () => {
   const [selectedModal, setSelectedModal] = useState<string>('')
   const [newWord, setNewWord] = useState<string>('')
+  const [words, setWords] = useState<WordType[]>([])
   const [modalWord, setModalWord] = useState<WordType>()
   const [selectedDeleteWordIds, setSelectedDeleteWordIds] = useState<number[]>([])
   const [isDeleteButtonDisabled, setIsDeleteButtonDisabled] = useState<boolean>(true)
+  const [page, setPage] = useState<number>(0)
   const submitProcessing = useRef(false)
+  const [totalCount, setTotalCount] = useState(0)
 
-  const { words, setWords } = useFetchWords()
+  async function fetchData(from: number, to: number) {
+    try {
+      const {
+        data: { wordData, count },
+      }: AxiosResponse<{
+        wordData: WordType[]
+        count: number
+      }> = await axios.get(WORDS_API_PATH, {
+        params: { from, to },
+      })
+
+      setWords(wordData)
+      setTotalCount(count)
+    } catch (error) {
+      console.error('There was an error fetching words:', error)
+    }
+  }
+
+  useEffect(() => {
+    void fetchData(0, 9)
+  }, [])
+
+  // const { words, setWords } = useFetchWords()
   const { setBodyFixed } = useBodyFixed()
 
   async function createWord(newWord: WordType) {
     try {
-      const { data: createdWord }: AxiosResponse<WordType> = await axios.post(
-        WORDS_API_PATH,
-        newWord,
-      )
+      await axios.post(WORDS_API_PATH, newWord)
 
-      setWords((words) => [...words, createdWord])
+      void fetchData(page, page + 9)
     } catch {
       alert('failed at adding the word')
     }
@@ -47,7 +69,7 @@ const Home = () => {
       await axios.delete(`${WORDS_API_PATH}?id=${String(id)}`)
 
       setSelectedDeleteWordIds([])
-      setWords((prevWords) => prevWords.filter((word) => word.id !== id))
+      void fetchData(page, page + 9)
     } catch {
       alert('could not delete the word')
     }
@@ -120,6 +142,8 @@ const Home = () => {
     for (const selectedDeleteWordId of selectedDeleteWordIds) {
       await deleteWord(selectedDeleteWordId)
     }
+
+    setIsDeleteButtonDisabled(true)
   }
 
   const handleSelectDeleteWord = (id: number) => {
@@ -141,6 +165,24 @@ const Home = () => {
         setIsDeleteButtonDisabled(false)
       }
     }
+  }
+
+  const handlePagination = (e: MouseEvent<HTMLElement>) => {
+    const pageNumber = Number(e.currentTarget.getAttribute('data-page-number'))
+
+    const getFromAndTo = () => {
+      const ITEM_PER_PAGE = 10
+      const from = pageNumber * ITEM_PER_PAGE
+      const to = from + ITEM_PER_PAGE - 1
+
+      return { from, to }
+    }
+
+    const { from, to } = getFromAndTo()
+
+    setPage(pageNumber)
+
+    void fetchData(from, to)
   }
 
   return (
@@ -182,31 +224,16 @@ const Home = () => {
           ))}
         </List>
 
-        {modalWord && (
-          <>
-            <Modal
-              title={modalWord.word}
-              onClose={handleModalClose}
-              isOpen={selectedModal === 'modal-definition'}
-            >
-              <DefinitionList word={modalWord} />
-            </Modal>
+        <Pagination totalCount={totalCount} onClick={handlePagination} />
 
-            {/* <Modal
-              title='delete the word'
-              onClose={handleModalClose}
-              isOpen={selectedModal === 'modal-delete'}
-            >
-              <p className={styles.deleteMessage}>
-                Are you sure you want to delete {modalWord.word}
-              </p>
-              <div className={styles.deleteButton}>
-                <ExecuteButton color='warning' onClick={() => handleDelete(modalWord.id)}>
-                  delete
-                </ExecuteButton>
-              </div>
-            </Modal> */}
-          </>
+        {modalWord && (
+          <Modal
+            title={modalWord.word}
+            onClose={handleModalClose}
+            isOpen={selectedModal === 'modal-definition'}
+          >
+            <DefinitionList word={modalWord} />
+          </Modal>
         )}
 
         {words.length > 0 ? (
