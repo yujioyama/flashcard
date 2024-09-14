@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { NextRequest, NextResponse } from 'next/server'
 import supabase from '@/lib/supabase'
 import type { WordType } from '@/types/word'
@@ -117,8 +116,6 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    // await request.json()がエラーになってしまうので、idをクエリパラメーターから取得
-    // next13の問題のよう
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
 

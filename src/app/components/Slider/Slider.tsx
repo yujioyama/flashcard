@@ -18,9 +18,6 @@ const Slider: React.FC<Props> = ({ words }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const maxSlideNumber = words.length
 
-  // 次へ/前へボタンを押すたびにactiveIndexが更新され、Sliderコンポーネントが再レンダリングされてしまうため、
-  // そのままだと次へ/前へボタンを押すたびに、スライドが毎回シャッフルされてしまう。しかし、スライドをシャッフルしたいのはページを開いた時のみである。
-  // useMemo化することで、次へ/前へボタンを押してactiveIndexが更新されても、wordsが更新されない限り、shuffledWordsは更新されない。
   const shuffledWords = useMemo(() => shuffleArray(words), [words])
 
   const handlePronunciation = (pronunciation: string) => {

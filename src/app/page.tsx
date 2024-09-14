@@ -51,7 +51,6 @@ const Home = () => {
     void fetchData(0, 9)
   }, [])
 
-  // const { words, setWords } = useFetchWords()
   const { setBodyFixed } = useBodyFixed()
 
   async function createWord(newWord: WordType) {
