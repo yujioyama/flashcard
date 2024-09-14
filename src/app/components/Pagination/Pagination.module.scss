@@ -1,4 +1,5 @@
 @use '../../styles/variables';
+@use '../../styles/mixin';
 
 .list {
   display: flex;
@@ -19,9 +20,11 @@
   color: variables.$main;
   border: 2px solid variables.$main;
   border-radius: 8px;
+  @include mixin.hover;
 
   &.isCurrent {
     color: variables.$white;
+    pointer-events: none;
     background-color: variables.$main;
   }
 }

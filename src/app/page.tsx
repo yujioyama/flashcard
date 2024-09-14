@@ -25,7 +25,7 @@ const Home = () => {
   const [modalWord, setModalWord] = useState<WordType>()
   const [selectedDeleteWordIds, setSelectedDeleteWordIds] = useState<number[]>([])
   const [isDeleteButtonDisabled, setIsDeleteButtonDisabled] = useState<boolean>(true)
-  const [page, setPage] = useState<number>(0)
+  const [currentPage, setCurrentPage] = useState<number>(0)
   const submitProcessing = useRef(false)
   const [totalCount, setTotalCount] = useState(0)
 
@@ -57,7 +57,7 @@ const Home = () => {
     try {
       await axios.post(WORDS_API_PATH, newWord)
 
-      void fetchData(page, page + 9)
+      void fetchData(currentPage, currentPage + 9)
     } catch {
       alert('failed at adding the word')
     }
@@ -68,7 +68,7 @@ const Home = () => {
       await axios.delete(`${WORDS_API_PATH}?id=${String(id)}`)
 
       setSelectedDeleteWordIds([])
-      void fetchData(page, page + 9)
+      void fetchData(currentPage, currentPage + 9)
     } catch {
       alert('could not delete the word')
     }
@@ -179,7 +179,7 @@ const Home = () => {
 
     const { from, to } = getFromAndTo()
 
-    setPage(pageNumber)
+    setCurrentPage(pageNumber)
 
     void fetchData(from, to)
   }
@@ -223,7 +223,7 @@ const Home = () => {
           ))}
         </List>
 
-        <Pagination totalCount={totalCount} onClick={handlePagination} />
+        <Pagination totalCount={totalCount} onClick={handlePagination} currentPage={currentPage} />
 
         {modalWord && (
           <Modal
