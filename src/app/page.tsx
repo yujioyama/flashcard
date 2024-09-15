@@ -123,6 +123,7 @@ const Home = () => {
       setNewWord('')
       setSelectedModal('')
     } catch (error: any) {
+      // eslint-disable-next-line
       if (error.code === 'ERR_NETWORK') {
         alert(`Your internet connection is not stable.`)
       }
