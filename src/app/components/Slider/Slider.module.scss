@@ -1,7 +1,18 @@
 @use '../../styles/variables';
+@use '../../styles/mixin';
 
 .swiper {
   padding: 100px 0 10px;
+
+  @include mixin.breakPoint('sp') {
+    padding-top: 60px;
+  }
+}
+
+.slide {
+  @include mixin.breakPoint('sp') {
+    width: 200px !important;
+  }
 }
 
 .slideInner {
@@ -9,6 +20,7 @@
   opacity: 0.3;
   transition: 0.7s;
   transform: scale(0.8);
+
   &.isActive {
     z-index: 1;
     pointer-events: auto;
@@ -34,6 +46,12 @@
   background-position: center;
   background-size: 50px;
   border-radius: 10px;
+
+  @include mixin.breakPoint('sp') {
+    width: 85px;
+    height: 50px;
+    background-size: 30px;
+  }
 }
 
 .progressbarFill {

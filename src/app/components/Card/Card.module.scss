@@ -1,10 +1,15 @@
 @use '../../styles/variables';
+@use '../../styles/mixin';
 
 .card {
   position: relative;
   box-sizing: border-box;
   height: 400px;
   cursor: pointer;
+
+  @include mixin.breakPoint('sp') {
+    height: 250px;
+  }
 }
 
 .cardInner {
@@ -21,6 +26,10 @@
   box-shadow: 0 3px 5px 5px rgba(variables.$black, 0.1);
   transition: all 1s ease;
   backface-visibility: hidden;
+
+  @include mixin.breakPoint('sp') {
+    padding: 10px;
+  }
 }
 
 .front {
@@ -37,6 +46,10 @@
   font-size: 40px;
   font-weight: variables.$font-bold;
   text-align: center;
+
+  @include mixin.breakPoint('sp') {
+    font-size: 30px;
+  }
 }
 
 .back {
@@ -49,6 +62,8 @@
 
 .phoneticsList {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: center;
   margin-top: 20px;
 }
@@ -61,5 +76,9 @@
   &:not(:last-child)::after {
     margin: 0 10px;
     content: 'or';
+  }
+
+  @include mixin.breakPoint('sp') {
+    font-size: 14px;
   }
 }

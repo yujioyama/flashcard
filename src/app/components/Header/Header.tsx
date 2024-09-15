@@ -6,8 +6,14 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <h1>
-        <Link href='/'>
-          <Image src='/icons/white/logo.svg' alt='ENGLISH CARD' width={462} height={74} />
+        <Link href='/' className={styles.link}>
+          <Image
+            src='/icons/white/logo.svg'
+            alt='ENGLISH CARD'
+            width={462}
+            height={74}
+            className={styles.image}
+          />
         </Link>
       </h1>
     </header>

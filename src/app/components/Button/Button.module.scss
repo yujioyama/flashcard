@@ -12,4 +12,10 @@
   background: variables.$blue;
   border-radius: 10px;
   @include mixin.hover;
+
+  @include mixin.breakPoint('sp') {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 16px;
+  }
 }

@@ -1,4 +1,10 @@
+@use '../../styles/_mixin';
+
 .mainInner {
   max-width: 700px;
   margin: 45px auto 0;
+
+  @include mixin.breakPoint('sp') {
+    margin-top: 25px;
+  }
 }

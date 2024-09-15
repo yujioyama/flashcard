@@ -1,4 +1,5 @@
 @use '../../styles/variables';
+@use '../../styles/_mixin';
 
 .item {
   position: relative;
@@ -9,6 +10,11 @@
   &:first-child {
     margin-top: 0;
   }
+
+  @include mixin.breakPoint('sp') {
+    width: 100%;
+    height: 60px;
+  }
 }
 
 .button {
@@ -16,13 +22,17 @@
   display: flex;
   align-items: center;
   width: 100%;
-  height: 80px;
+  height: 100%;
   padding: 0 55px 0 50px;
   font-size: 20px;
   line-height: 1;
   background: variables.$white;
   border-radius: 10px;
   box-shadow: (0 4px 3px 2px rgba(variables.$black, 0.1));
+
+  @include mixin.breakPoint('sp') {
+    font-size: 16px;
+  }
 
   &::before {
     position: absolute;
@@ -64,6 +74,11 @@
   border: 2px solid variables.$main;
   border-radius: 5px;
   transform: translateY(-50%);
+
+  @include mixin.breakPoint('sp') {
+    width: 16px;
+    height: 16px;
+  }
 
   &:checked {
     background-image: url('/icons/main/check.svg');

@@ -1,5 +1,11 @@
+@use '../../styles/_mixin';
 .list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+
+  @include mixin.breakPoint('sp') {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 }

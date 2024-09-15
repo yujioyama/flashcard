@@ -1,15 +1,14 @@
 @use './styles/variables';
+@use './styles/mixin';
 
 .actionBox {
   display: flex;
+  gap: 25px;
   max-width: 700px;
   margin: 0 auto;
-}
 
-.actionBoxButton {
-  margin-left: 25px;
-  &:first-child {
-    margin-left: 0;
+  @include mixin.breakPoint('sp') {
+    gap: 15px;
   }
 }
 

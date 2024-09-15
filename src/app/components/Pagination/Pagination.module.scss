@@ -5,7 +5,7 @@
   display: flex;
   gap: 20px;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .link {
@@ -21,6 +21,12 @@
   border: 2px solid variables.$main;
   border-radius: 8px;
   @include mixin.hover;
+
+  @include mixin.breakPoint('sp') {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
 
   &.isCurrent {
     color: variables.$white;

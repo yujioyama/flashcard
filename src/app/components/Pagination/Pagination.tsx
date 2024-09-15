@@ -18,7 +18,7 @@ const Pagination: React.FC<Props> = ({ totalCount, onClick, currentPage }: Props
   return (
     <ol className={styles.list}>
       {range(1, Math.ceil(totalCount / PER_PAGE)).map((number, index) => (
-        <li key={index} className={styles.list}>
+        <li key={index} className={styles.item}>
           <button
             type='button'
             className={clsx(styles.link, isCurrent(index) && styles.isCurrent)}

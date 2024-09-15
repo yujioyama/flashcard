@@ -1,22 +1,40 @@
 @use '../../styles/variables';
+@use '../../styles/mixin';
 
 .heading {
   display: flex;
+  column-gap: 15px;
   justify-content: center;
+
+  @include mixin.breakPoint('sp') {
+    flex-direction: column;
+    row-gap: 5px;
+  }
 }
 
 .headingText {
   font-size: 18px;
   font-weight: variables.$font-bold;
+
+  @include mixin.breakPoint('sp') {
+    font-size: 14px;
+  }
 }
 
 .partOfSpeech {
-  margin-left: 15px;
   font-size: 18px;
+
+  @include mixin.breakPoint('sp') {
+    font-size: 14px;
+  }
 }
 
 .itemLarge {
   margin-top: 45px;
+
+  @include mixin.breakPoint('sp') {
+    margin-top: 30px;
+  }
 
   &:first-child {
     margin-top: 0;
@@ -25,6 +43,10 @@
 
 .list {
   margin-top: 30px;
+
+  @include mixin.breakPoint('sp') {
+    margin-top: 20px;
+  }
 }
 
 .item {
@@ -36,6 +58,10 @@
 
   &:first-child {
     margin-top: 0;
+  }
+
+  @include mixin.breakPoint('sp') {
+    padding: 15px 10px;
   }
 }
 
@@ -52,6 +78,14 @@
   color: variables.$white;
   background: variables.$main;
   border-radius: 50%;
+
+  @include mixin.breakPoint('sp') {
+    top: -5px;
+    left: -5px;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
 }
 
 .row {
@@ -65,9 +99,17 @@
 .title {
   font-size: 16px;
   font-weight: variables.$font-bold;
+
+  @include mixin.breakPoint('sp') {
+    font-size: 14px;
+  }
 }
 
 .definition {
   margin-top: 10px;
   font-size: 16px;
+
+  @include mixin.breakPoint('sp') {
+    font-size: 14px;
+  }
 }

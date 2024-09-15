@@ -38,9 +38,8 @@ const Slider: React.FC<Props> = ({ words }) => {
   return (
     <>
       <Swiper
-        spaceBetween={100}
+        spaceBetween={5}
         centeredSlides
-        slidesPerView={1.5}
         className={styles.swiper}
         pagination={{
           type: 'progressbar',
@@ -48,6 +47,8 @@ const Slider: React.FC<Props> = ({ words }) => {
           horizontalClass: `${styles.horizontal}`,
         }}
         modules={[Pagination]}
+        slidesPerView={'auto'}
+        breakpoints={{ 420: { slidesPerView: 2 } }}
       >
         <SlidePrevButton activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
         <SlideNextButton
@@ -58,7 +59,7 @@ const Slider: React.FC<Props> = ({ words }) => {
 
         {shuffledWords.map((word) => {
           return (
-            <SwiperSlide key={word.id}>
+            <SwiperSlide key={word.id} className={styles.slide}>
               {({ isActive }) => (
                 <div className={clsx(styles.slideInner, isActive && styles.isActive)}>
                   <Card word={word} isActive={isActive} />

@@ -1,4 +1,5 @@
 @use '../../styles/variables';
+@use '../../styles/_mixin';
 
 .main {
   display: block;
@@ -6,4 +7,8 @@
   padding: 70px 30px;
   background-color: variables.$main-light;
   border-radius: 50px 50px 0 0;
+
+  @include mixin.breakPoint('sp') {
+    padding-top: 30px;
+  }
 }

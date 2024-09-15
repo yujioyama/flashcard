@@ -1,6 +1,25 @@
+@use '../../styles/_mixin';
+
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 47px 0 34px;
+
+  @include mixin.breakPoint('sp') {
+    padding: 25px 0 17px;
+  }
+}
+
+.link {
+  display: block;
+  margin: 0 auto;
+
+  @include mixin.breakPoint('sp') {
+    width: 300px;
+  }
+}
+
+.image {
+  width: 100%;
 }
