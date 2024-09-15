@@ -11,7 +11,7 @@
 
 .slide {
   @include mixin.breakPoint('sp') {
-    width: 200px !important;
+    width: 280px !important;
   }
 }
 
