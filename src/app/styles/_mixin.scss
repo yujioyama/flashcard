@@ -9,7 +9,7 @@
 
 $breakpoints: (
   'pc': 'screen and (min-width: 796px)',
-  'sp': 'screen and (max-width: 420px)',
+  'sp': 'screen and (max-width: 500px)',
 );
 
 @mixin breakPoint($key) {

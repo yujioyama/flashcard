@@ -48,7 +48,7 @@ const Slider: React.FC<Props> = ({ words }) => {
         }}
         modules={[Pagination]}
         slidesPerView={'auto'}
-        breakpoints={{ 420: { slidesPerView: 2 } }}
+        breakpoints={{ 500: { slidesPerView: 2 } }}
       >
         <SlidePrevButton activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
         <SlideNextButton
