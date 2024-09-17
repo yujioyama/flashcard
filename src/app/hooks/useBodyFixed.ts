@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { isIOSUserAgent } from '../utilities/isIOSUserAgent'
 
 export const useBodyFixed = () => {
-  const [bodyFixed, setBodyFixed] = useState<boolean>(false)
-  const [scrollPosition, setScrollPosition] = useState<number>(0)
+  const [isBodyFixed, setIsBodyFixed] = useState<boolean>(false)
+  const scrollPosition = useRef(0)
   const isFirstRender = useRef(false)
 
   useEffect(() => {
@@ -17,11 +17,11 @@ export const useBodyFixed = () => {
 
     const isIOS = isIOSUserAgent()
 
-    if (bodyFixed) {
+    if (isBodyFixed) {
       if (isIOS) {
-        setScrollPosition(window.pageYOffset)
+        scrollPosition.current = window.pageYOffset
         body.style.position = 'fixed'
-        body.style.top = `-${scrollPosition}px`
+        body.style.top = `-${scrollPosition.current}px`
       } else {
         body.style.overflow = 'hidden'
       }
@@ -29,13 +29,12 @@ export const useBodyFixed = () => {
       if (isIOS) {
         body.style.removeProperty('position')
         body.style.removeProperty('top')
-        window.scrollTo(0, scrollPosition)
+        window.scrollTo(0, scrollPosition.current)
       } else {
         body.style.removeProperty('overflow')
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bodyFixed])
+  }, [isBodyFixed])
 
-  return { bodyFixed, setBodyFixed }
+  return { setIsBodyFixed }
 }

@@ -3,6 +3,7 @@
 .body {
   display: flex;
   flex-direction: column;
+  width: 100%;
   font-weight: variables.$font-regular;
   color: variables.$black;
   background-color: variables.$main;

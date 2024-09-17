@@ -51,7 +51,7 @@ const Home = () => {
     void fetchData(0, 9)
   }, [])
 
-  const { setBodyFixed } = useBodyFixed()
+  const { setIsBodyFixed } = useBodyFixed()
 
   async function createWord(newWord: WordType) {
     try {
@@ -83,18 +83,18 @@ const Home = () => {
       },
     } = event
     if (modal) {
-      setBodyFixed(true)
+      setIsBodyFixed(true)
       setSelectedModal(modal)
     }
   }
 
   const handleModalClose = () => {
-    setBodyFixed(false)
+    setIsBodyFixed(false)
     setSelectedModal('')
   }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setBodyFixed(false)
+    setIsBodyFixed(false)
     setNewWord(event.target.value)
   }
 
