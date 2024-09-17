@@ -1,46 +1,28 @@
 # README
 
-## 本アプリについて
+## About this app
 
-本アプリは英単語を暗記することに特化した、暗記カードアプリです。<br>
-覚えたい単語を追加すると、暗記カードの裏に自動で意味や例文などが記入されます。<br>
-英英辞典のapiを使用しているため、意味は英語で表示されます。
+This app helps you memorize English vocabulary. When you add a word, it gets registered in the system along with its meaning and example sentences. On the testing page, you’ll see the word on the front of a card and check if you’ve memorized it. You can then view the answer on the back of the card.
 
-## 使用した技術
+## skills used in this project
 
 - Next.js(Next 13.4.19)
 - Typescript
 - SCSS Modules
+- Supabase (used to save the data of words the user wants to memorize)
 
 ## Node
+
 18.17.1
-## 起動方法
 
-npmインストール：`npm i `
+## The specifications of each page
 
-起動：`npm run dev`
+### top page
 
-## 各画面の仕様
+![top page](https://github.com/user-attachments/assets/7e397e16-f588-4a1b-83d8-5cdd58ac5762)
 
-### トップページ
-![トップページ](https://github.com/yujioyama/flashcard/assets/43977868/c131914f-8cd2-4856-8de8-3e88d1eacd59)
+### test page
 
+**The order of the words displayed changes every time you reload the page**
 
-### トップページ 編集モード
-
-
-![トップページ - 編集モード](https://github.com/yujioyama/flashcard/assets/43977868/8c13b8fc-703d-490d-b71d-c85c1769ec93)
-
-
-### テストページ
-
-
-**表示される単語はページをリロードするたびにシャッフルされてランダムな順番で表示されます。**
-
-
-![テストページ](https://github.com/yujioyama/flashcard/assets/43977868/55540b35-60f2-4533-9450-45d83d4be239)
-
-### データの扱い方法
-
-[無料レンタルサーバー Xfree](https://www.xfree.ne.jp/) を使用<br>
-jsonファイルを格納し、phpでGETなどのhttpメソッドを処理
+![test page](https://github.com/user-attachments/assets/6cb65e01-f061-491f-9441-9a99852311ae)
