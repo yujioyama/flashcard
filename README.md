@@ -4,7 +4,7 @@
 
 This app helps you memorize English vocabulary. When you add a word, it gets registered in the system along with its meaning and example sentences. On the testing page, you’ll see the word on the front of a card and check if you’ve memorized it. You can then view the answer on the back of the card.
 
-## skills used in this project
+## Skills used in this project
 
 - Next.js(Next 13.4.19)
 - Typescript
@@ -15,13 +15,13 @@ This app helps you memorize English vocabulary. When you add a word, it gets reg
 
 18.17.1
 
-## The specifications of each page
+## Specifications of each page
 
-### top page
+### Top page
 
 ![top page](https://github.com/user-attachments/assets/7e397e16-f588-4a1b-83d8-5cdd58ac5762)
 
-### test page
+### Test page
 
 **The order of the words displayed changes every time you reload the page**
 
