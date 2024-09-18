@@ -6,7 +6,7 @@ This app helps you memorize English vocabulary. When you add a word, it gets reg
 
 ## Skills used in this project
 
-- Next.js(Next 13.4.19)
+- Next.js(13.4.19)
 - Typescript
 - SCSS Modules
 - Supabase (used to save the data of words the user wants to memorize)
